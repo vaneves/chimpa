@@ -13,11 +13,13 @@ class Category extends Model
 	
 	/**
 	 * @Column(Type="String")
+	 * @Required()
 	 */
-	public $Title;
+	public $Name;
 	
 	/**
 	 * @Column(Type="String")
+	 * @Required()
 	 */
 	public $Slug;
 }

@@ -15,8 +15,13 @@
 		<header>
 			<div class="container">
 				<div class="row-fluid">
-					<div class="span5">
+					<div class="span11">
 						<div class="logo"><h1 class="muted">Orango</h1></div>
+					</div>
+					<div class="span1 visible-desktop">
+						<?php if(Auth::isLogged()): ?>
+						<img src="http://www.gravatar.com/avatar/<?= md5(Session::get('user')->Email) ?>?s=48" alt="<?= Session::get('user')->Name ?>" class="img-circle">
+						<?php endif ?>
 					</div>
 				</div>
 			</div>
@@ -31,10 +36,18 @@
 						<div class="nav-collapse collapse">
 							<?php if (Auth::isLogged()): ?>
 								<ul class="nav">
-									<li><a href="/ticket/add">Criar Ticket</a></li>
+									<li><a href="~/">Ver Site</a></li>
+									<li class="dropdown">
+										<a href="#" class="dropdown-toggle" data-toggle="dropdown">Novo <b class="caret"></b></a>
+										<ul class="dropdown-menu">
+											<li><a href="~/admin/post/add">Post</a></li>
+											<li><a href="~/admin/page/add">Página</a></li>
+											<li><a href="~/admin/user/add">Usuário</a></li>
+										</ul>
+									</li>
 								</ul>
 								<ul class="nav pull-right">
-									<li><a href="/logout">Sair</a></li>
+									<li><a href="~/user/logout">Sair</a></li>
 								</ul>
 							<?php endif ?>
 						</div>
@@ -44,13 +57,24 @@
 		</header>
 		<div class="container">
 			<div class="row-fluid">
-				<?= CONTENT ?>
+				<div class="span3">
+					<ul class="nav nav-tabs nav-stacked">
+						<li class="active"><a href="~/admin/post/">Posts</a></li>
+						<li><a href="~/admin/category/">Categorias</a></li>
+						<li><a href="~/admin/page/">Páginas</a></li>
+						<li><a href="~/admin/user/">Usuários</a></li>
+					</ul>
+				</div>
+				<div class="span9">
+					<?= CONTENT ?>
+				</div>
 			</div>
 			<hr>
 			<div class="footer">
-				<p>&copy; Van Neves 2013 - <?= date('Y') ?></p>
+				<p class="muted">Orango CMS - Feito com <a href="http://triladophp.org">Trilado Framework</a>.</p>
 			</div>
 		</div>
-		<script src="~/js/script.js"></script>
+		<script src="~/js/jquery.min.js"></script>
+		<script src="~/js/bootstrap.min.js"></script>
 	</body>
 </html>
