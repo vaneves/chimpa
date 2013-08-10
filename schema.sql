@@ -1,24 +1,30 @@
--- phpMyAdmin SQL Dump
--- version 3.5.2.2
--- http://www.phpmyadmin.net
---
--- Servidor: 127.0.0.1
--- Tempo de Geração: 
--- Versão do Servidor: 5.5.27
--- Versão do PHP: 5.4.7
-
-SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
+START TRANSACTION;
 SET time_zone = "+00:00";
 
---
--- Banco de Dados: `orango`
---
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8 */;
 
--- --------------------------------------------------------
+CREATE TABLE IF NOT EXISTS `category` (
+  `Id` int(11) NOT NULL AUTO_INCREMENT,
+  `Name` varchar(128) NOT NULL,
+  `Slug` varchar(128) NOT NULL,
+  PRIMARY KEY (`Id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
---
--- Estrutura da tabela `post`
---
+CREATE TABLE IF NOT EXISTS `page` (
+  `Id` int(11) NOT NULL AUTO_INCREMENT,
+  `Title` varchar(128) NOT NULL,
+  `Slug` varchar(128) NOT NULL,
+  `Content` text,
+  `ParentId` int(11) NOT NULL,
+  `Status` int(11) DEFAULT NULL,
+  `Order` int(11) DEFAULT NULL,
+  PRIMARY KEY (`Id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 CREATE TABLE IF NOT EXISTS `post` (
   `Id` int(11) NOT NULL AUTO_INCREMENT,
@@ -31,13 +37,13 @@ CREATE TABLE IF NOT EXISTS `post` (
   `Content` text NOT NULL,
   `Status` int(11) NOT NULL,
   PRIMARY KEY (`Id`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
--- --------------------------------------------------------
-
---
--- Estrutura da tabela `user`
---
+CREATE TABLE IF NOT EXISTS `post_category` (
+  `PostId` int(11) NOT NULL,
+  `CategoryId` varchar(45) NOT NULL,
+  PRIMARY KEY (`PostId`,`CategoryId`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE IF NOT EXISTS `user` (
   `Id` int(11) NOT NULL AUTO_INCREMENT,
@@ -45,11 +51,9 @@ CREATE TABLE IF NOT EXISTS `user` (
   `Email` varchar(128) NOT NULL,
   `Password` varchar(32) NOT NULL,
   PRIMARY KEY (`Id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+COMMIT;
 
---
--- Extraindo dados da tabela `user`
---
-
-INSERT INTO `user` (`Id`, `Name`, `Email`, `Password`) VALUES
-(1, 'Van Neves', 'vaneves@vaneves.com', '3c086f596b4aee58e1d71b3626fefc87');
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
