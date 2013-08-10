@@ -6,6 +6,11 @@ class UserController extends AdminController
 	 */
 	public function admin_login()
 	{
+		if(Auth::isLogged())
+		{
+			return $this->_redirect('~/admin/post');
+		}
+		
 		if(Request::isPost())
 		{
 			$dados = $this->_data();
