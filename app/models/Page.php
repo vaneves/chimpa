@@ -40,4 +40,20 @@ class Page extends Model
 	 * @Column(Type="Int")
 	 */
 	public $Order;
+	
+	public static function deleteAll($ids)
+	{
+		$db = Database::factory();
+		
+		$list = '(';
+		foreach ($ids as $k => $i)
+		{
+			$list .= '?,';
+			$ids[$k] = (int)$i;
+		}
+		$list = substr($list, 0, strlen($list) - 1) . ')';
+		
+		$db->Page->whereArray('Id IN ' . $list, $ids)->deleteAll();
+		$db->save();
+	}
 }

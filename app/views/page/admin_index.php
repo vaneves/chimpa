@@ -9,7 +9,7 @@
 			<div class="clearfix"></div>
 		</div>
 		<h1>Páginas</h1>
-		<table class="table table-striped table-bordered2">
+		<table class="table table-striped">
 			<caption>
 				<div class="btn-group pull-right">
 					<a href="~/admin/page/add" class="btn btn-inverse"><i class="icon icon-plus icon-white"></i> Nova</a>
@@ -19,9 +19,9 @@
 			<thead>
 				<tr>
 					<th class="span1">&nbsp;</th>
-					<th class="span5">Título</th>
-					<th class="span6">Ordem</th>
-					<th class="span6">Status</th>
+					<th class="span9">Título</th>
+					<th class="span1">Ordem</th>
+					<th class="span1">Status</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -33,7 +33,7 @@
 								<a href="~/admin/page/edit/<?= $p->Id ?>"><?= $p->Title ?></a>
 							</td>
 							<td><?= $p->Order ?></td>
-							<td><?= $p->Status ?></td>
+							<td><span class="badge <?= $p->Status ? 'badge-success' : '' ?>">&nbsp;</span></td>
 						</tr>
 					<?php endforeach; ?>
 				<?php else: ?>
