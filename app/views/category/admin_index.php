@@ -25,11 +25,11 @@
 			</thead>
 			<tbody>
 				<?php if ($model->Count): ?>
-					<?php foreach ($model->Data as $m): ?>
+					<?php foreach ($model->Data as $c): ?>
 						<tr>
-							<td><input type="checkbox" name="items[]" value="<?= $m->Id ?>" /></td>
-							<td><a href="~/admin/category/edit/<?= $m->Id ?>"><?= $m->Name ?></a></td>
-							<td><?= $m->Slug ?></td>
+							<td><input type="checkbox" name="items[]" value="<?= $c->Id ?>" /></td>
+							<td><a href="~/admin/category/edit/<?= $c->Id ?>"><?= $c->Name ?></a></td>
+							<td><?= $c->Slug ?></td>
 						</tr>
 					<?php endforeach; ?>
 				<?php else: ?>
@@ -38,8 +38,8 @@
 						<td colspan="2">Não existe nenhuma categoria.</td>
 					</tr>
 				<?php endif; ?>
-
 			</tbody>
 		</table>
+		<?= Pagination::create('admin/category/index', $model->Count, $p, $m) ?>
 	</div>
 </form>

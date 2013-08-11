@@ -5,6 +5,7 @@ class CategoryController extends AdminController
 
 	public function admin_index($p = 1, $m = 20, $o = 'Id', $t = 'DESC')
 	{
+		//carregar mensagem passada por outra action via session
 		$msg = Session::get('message');
 		if($msg)
 		{
@@ -13,6 +14,13 @@ class CategoryController extends AdminController
 		}
 		
 		$categories = Category::all($p, $m, $o, $t);
+		
+		//naum mostrar paginas além da conta
+		if($p > ceil($categories->Count / $m))
+		{
+			return $this->_redirect('~/admin/category');
+		}
+		
 		return $this->_view($categories);
 	}
 
