@@ -32,6 +32,7 @@ class PageController extends AdminController
 		}
 		$pages = Page::all(1, 100, 'Title');
 		$this->_set('pages', $pages);
+		$this->_set('label', 'Criar');
 		
 		return $this->_view($page);
 	}
@@ -64,6 +65,7 @@ class PageController extends AdminController
 		
 		$pages = Page::all(1, 100, 'Title');
 		$this->_set('pages', $pages);
+		$this->_set('label', 'Editar');
 		
 		return $this->_view('admin_add', $page);
 	}
