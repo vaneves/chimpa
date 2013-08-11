@@ -47,7 +47,7 @@
 									</li>
 								</ul>
 								<ul class="nav pull-right">
-									<li><a href="~/user/logout">Sair</a></li>
+									<li><a href="~/admin/user/logout">Sair</a></li>
 								</ul>
 							<?php endif ?>
 						</div>
@@ -57,6 +57,7 @@
 		</header>
 		<div class="container">
 			<div class="row-fluid">
+				<?php if (Auth::isLogged()): ?>
 				<div class="span3">
 					<ul class="nav nav-tabs nav-stacked">
 						<li class="active"><a href="~/admin/post/">Posts</a></li>
@@ -69,6 +70,12 @@
 					<?= FLASH ?>
 					<?= CONTENT ?>
 				</div>
+				<?php else: ?>
+				<div class="span12">
+					<?= FLASH ?>
+					<?= CONTENT ?>
+				</div>
+				<?php endif ?>
 			</div>
 			<hr>
 			<div class="footer">

@@ -28,6 +28,14 @@ class UserController extends AdminController
 		}
 		return $this->_view();
 	}
+	
+	public function admin_logout()
+	{
+		Session::clear();
+		Auth::clear();
+		return $this->_redirect('~/admin/');
+	}
+	
 	public function admin_index($p = 1, $m = 20, $o = 'Id', $t = 'DESC')
 	{
 		$users = User::all($p, $m, $o, $t);
