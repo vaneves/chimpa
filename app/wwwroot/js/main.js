@@ -26,8 +26,7 @@ $(document).ready(function(){
 	});
 	
 	// User add validation
-	$('#user-form').validate(
-	{
+	$('#user-form').validate({
 		rules: {
 			Name: {
 				minlength: 3,
@@ -58,6 +57,30 @@ $(document).ready(function(){
 		},
 		highlight: validateHighLight(),
 		success: validateSuccess()
+	});
+
+	//Profile form
+	$('#profile-form').validate({
+		rules: {
+			Email: {
+				required: true,
+				email: true
+			},
+			Name: {
+				required: true,
+				minlength: 3
+			}
+		},
+		messages: {
+			Email: {
+				required: 'Você deve informar seu e-mail.',
+				email: 'O e-mail está em formato incorreto.'
+			},
+			Name: {
+				required: 'Você deve informar seu nome.',
+				minlength: 'O nome deve possuir no mínimo 3 caractéres.'
+			}
+		}
 	});
 
 	$('#profile-form #Password').keydown(function(){
