@@ -73,7 +73,6 @@
 				</div>
 				<?php else: ?>
 				<div class="span12">
-					<?= FLASH ?>
 					<?= CONTENT ?>
 				</div>
 				<?php endif ?>
