@@ -18,11 +18,6 @@
 					<div class="span11">
 						<div class="logo"><h1 class="muted">Orango</h1></div>
 					</div>
-					<div class="span1 visible-desktop">
-						<?php if(Auth::isLogged()): ?>
-						<img src="http://www.gravatar.com/avatar/<?= md5(Session::get('user')->Email) ?>?s=48" alt="<?= Session::get('user')->Name ?>" class="img-circle">
-						<?php endif ?>
-					</div>
 				</div>
 			</div>
 			<div class="navbar navbar-inverse navbar-fixed-top">
@@ -47,7 +42,17 @@
 									</li>
 								</ul>
 								<ul class="nav pull-right">
-									<li><a href="~/admin/user/logout">Sair</a></li>
+									<li class="dropdown">
+										<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+											<img src="http://www.gravatar.com/avatar/<?= md5(Session::get('user')->Email) ?>?s=16" alt="<?= Session::get('user')->Name ?>">
+										<?= Session::get('user')->Name ?>
+											<b class="caret"></b>
+										</a>
+										<ul class="dropdown-menu">
+											<li><a href="~/admin/user/me">Editar Perfil</a></li>
+											<li><a href="~/admin/user/logout">Sair</a></li>
+										</ul>
+									</li>
 								</ul>
 							<?php endif ?>
 						</div>

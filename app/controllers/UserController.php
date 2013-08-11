@@ -114,4 +114,55 @@ class UserController extends AdminController
 		}
 		$this->_redirect('~/admin/user');
 	}
+
+	public function admin_me()
+	{
+		$user = Session::get('user');
+
+		if (Request::isPost()) 
+		{
+			try
+			{
+				$user = User::get($user->Id);
+
+				//preservar o password antigo
+				$oldpass = $user->Password;
+				$user = $this->_data($user);
+				$user->Password = $oldpass;
+
+				$pass = Request::post('Password');
+				if ($pass) 
+				{
+					$repass = Request::post('Repassword');
+					$oldpass = Request::post('OldPassword');
+					if ($user->checkPassword($oldpass)) 
+					{
+						if($pass === $repass)
+						{
+							$user->setPassword($pass);
+						}
+						else
+						{
+							throw new ValidationException('As senhas devem ser iguais.', 1);
+						}
+					}
+					else
+					{
+						throw new ValidationException('A senha antiga não confere.', 1);
+					}
+
+					$user->save();
+					$this->_flash('alert alert-success', 'Usuário salvo com sucesso.');
+				}
+			}catch(ValidationException $e)
+			{
+				$this->_flash('alert alert-error', $e->getMessage());
+			}catch(Exception $e)
+			{
+				$this->_flash('alert alert-error', 'Ocorreu um erro ao tentar salvar o usuário.');
+			}
+		}
+
+		return $this->_view($user);
+	}
 }

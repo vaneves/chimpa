@@ -59,6 +59,18 @@ $(document).ready(function(){
 		highlight: validateHighLight(),
 		success: validateSuccess()
 	});
+
+	$('#profile-form #Password').keydown(function(){
+		var self = $(this);
+		if(self.val())
+		{
+			$('#Repassword, #OldPassword-group').show('fast');
+		}
+		else
+		{
+			$('#Repassword, #OldPassword-group').hide('fast');
+		}
+	});
 });
 
 function validateSuccess(){

@@ -49,7 +49,12 @@ class User extends Model
 	
 	public static function encrypt($password)
 	{
-		return md5($password);
+		return md5(Config::get('salt') . $password);
+	}
+
+	public function checkPassword($password)
+	{
+		return self::encrypt($password) === $this->Password;
 	}
 	
 	public static function deleteAll($ids)
