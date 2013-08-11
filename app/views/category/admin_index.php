@@ -35,7 +35,7 @@
 				<?php else: ?>
 					<tr>
 						<td>&nbsp;</td>
-						<td colspan="2">Não existe nenhuma categoria.</td>
+						<td colspan="2">Não há categorias a serem listadas.</td>
 					</tr>
 				<?php endif; ?>
 			</tbody>
