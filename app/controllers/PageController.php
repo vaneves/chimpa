@@ -19,11 +19,12 @@ class PageController extends AdminController
 				$page->Status = Request::post('Draft') ? 0 : 1;
 				$page->Content = Request::post('Content');
 				$page->save();
-				$this->_flash('alert', 'Página salva com sucesso.');
+				$this->_flash('alert alert-success', 'Página salva com sucesso.');
+				$this->_redirect('~/admin/page/edit/' . $page->Id);
 			} 
 			catch (ValidationException $e)
 			{
-				$this->_flash('alert', $e->getMessage());
+				$this->_flash('alert alert-error', $e->getMessage());
 			}
 			catch (Exception $e)
 			{
@@ -50,12 +51,13 @@ class PageController extends AdminController
 			try
 			{
 				$page = $this->_data($page);
+				$page->Status = Request::post('Draft') ? 0 : 1;
 				$page->save();
-				$this->_flash('alert', 'Página salva com sucesso.');
+				$this->_flash('alert alert-success', 'Página salva com sucesso.');
 			} 
 			catch (ValidationException $e)
 			{
-				$this->_flash('alert', $e->getMessage());
+				$this->_flash('alert alert-error', $e->getMessage());
 			}
 			catch (Exception $e)
 			{
@@ -70,24 +72,19 @@ class PageController extends AdminController
 		return $this->_view('admin_add', $page);
 	}
 	
-	public function admin_remove($id)
+	public function admin_remove()
 	{
-		$page = Page::get($id);
-		if($page)
+		if (Request::isPost())
 		{
 			try
 			{
-				$page->delete();
-				$this->_flash('alert', 'Página excluída com sucesso.');
-			}
-			catch(Exception $e)
+				$ids = Request::post('items', array());
+				Page::deleteAll($ids);
+				$this->_flash('alert alert-success', 'Páginas excluídos com sucesso.');
+			} catch (Exception $e)
 			{
-				$this->_flash('alert alert-error', 'Ocorreu um erro e não foi possível excluir a página.');
+				$this->_flash('alert alert-error', 'Ocorreu um erro e não foi possível excluir as páginas.');
 			}
-		}
-		else
-		{
-			$this->_flash('alert alert-error', 'Página não encontrada.');
 		}
 		$this->_redirect('~/admin/page');
 	}

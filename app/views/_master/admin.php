@@ -8,6 +8,7 @@
 		<meta name="author" content="Vaneves">
 
 		<link href="~/css/bootstrap.css" rel="stylesheet">
+		<link href="~/css/bootstrap-responsive.css" rel="stylesheet">
 		<link href="~/css/style.css" rel="stylesheet">
 	</head>
 
@@ -77,7 +78,6 @@
 				</div>
 				<?php else: ?>
 				<div class="span12">
-					<?= FLASH ?>
 					<?= CONTENT ?>
 				</div>
 				<?php endif ?>
