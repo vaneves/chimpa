@@ -1,38 +1,48 @@
-<h1>Páginas</h1>
-<table class="table table-striped">
-	<thead>
-		<tr>
-			<th>Título</th>
-			<th>Ordem</th>
-			<th>Status</th>
-		</tr>
-	</thead>
-	<tbody>
-		<?php if($model->Data): ?>
-			<?php foreach($model->Data as $p): ?>
-			<tr>
-				<td>
-					<a href="~/admin/page/edit/<?= $p->Id ?>"><?= $p->Title ?></a>
-				</td>
-				<td><?= $p->Order ?></td>
-				<td><?= $p->Status ?></td>
-			</tr>
-			<?php endforeach; ?>
-		<?php else: ?>
-			<tr>
-				<td colspan="3">Nenhuma página para ser listada.</td>
-			</tr>
-		<?php endif ?>
-	</tbody>
-</table>
-<div class="pagination">
-	<ul>
-		<li><a href="#">&laquo;</a></li>
-		<li><a href="#">1</a></li>
-		<li><a href="#">2</a></li>
-		<li><a href="#">3</a></li>
-		<li><a href="#">4</a></li>
-		<li><a href="#">5</a></li>
-		<li><a href="#">&raquo;</a></li>
-	</ul>
+<div class="row-fluid">
+	<form action="~/admin/page/remove" method="POST">
+		<div class="alert alert-warning" id="page-remove-confirm" style="display: none;">
+			<span>Tem certeza que deseja remover estas páginas?</span>
+			<div class="btn-navbar pull-right">
+				<input type="submit" class="btn btn-danger" value="Excluir" />
+				<input type="button" data-toggle="dismiss" value="Cancelar" class="btn" />
+			</div>
+			<div class="clearfix"></div>
+		</div>
+		<h1>Páginas</h1>
+		<table class="table table-striped table-bordered2">
+			<caption>
+				<div class="btn-group pull-right">
+					<a href="~/admin/page/add" class="btn btn-inverse"><i class="icon icon-plus icon-white"></i> Nova</a>
+					<a href="#page-remove-confirm" data-toggle="confirm" class="btn">Excluir</a>
+				</div>
+			</caption>
+			<thead>
+				<tr>
+					<th class="span1">&nbsp;</th>
+					<th class="span5">Título</th>
+					<th class="span6">Ordem</th>
+					<th class="span6">Status</th>
+				</tr>
+			</thead>
+			<tbody>
+				<?php if($model->Data): ?>
+					<?php foreach ($model->Data as $p): ?>
+						<tr>
+							<td><input type="checkbox" name="items[]" value="<?= $p->Id ?>"></td>
+							<td>
+								<a href="~/admin/page/edit/<?= $p->Id ?>"><?= $p->Title ?></a>
+							</td>
+							<td><?= $p->Order ?></td>
+							<td><?= $p->Status ?></td>
+						</tr>
+					<?php endforeach; ?>
+				<?php else: ?>
+					<tr>
+						<td colspan="4">Não há páginas a serem listadas.</td>
+					</tr>
+				<?php endif ?>
+			</tbody>
+		</table>
+		<?= Pagination::create('admin/page/index', $model->Count, $p, $m) ?>
+	</form>
 </div>

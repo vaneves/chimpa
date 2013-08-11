@@ -25,19 +25,25 @@
 				</tr>
 			</thead>
 			<tbody>
-				<?php foreach ($model->Data as $u): ?>
+				<?php if($model->Data): ?>
+					<?php foreach ($model->Data as $u): ?>
+						<tr>
+							<td><input type="checkbox" name="items[]" value="<?= $u->Id ?>"></td>
+							<td>
+								<img src="http://www.gravatar.com/avatar/<?= md5($u->Email) ?>?s=24" alt="<?= $u->Name ?>">
+								<a href="~/admin/user/edit/<?= $u->Id ?>"><?= $u->Name ?></a>
+							</td>
+							<td><?= $u->Email ?></td>
+							<td>-</td>
+						</tr>
+					<?php endforeach; ?>
+				<?php else: ?>
 					<tr>
-						<td><input type="checkbox" name="items[]" value="<?= $u->Id ?>"></td>
-						<td>
-							<img src="http://www.gravatar.com/avatar/<?= md5($u->Email) ?>?s=24" alt="<?= $u->Name ?>">
-							<a href="~/admin/user/edit/<?= $u->Id ?>"><?= $u->Name ?></a>
-						</td>
-						<td><?= $u->Email ?></td>
-						<td>-</td>
+						<td colspan="4">Não há usuários a serem listadas.</td>
 					</tr>
-				<?php endforeach; ?>
+				<?php endif ?>
 			</tbody>
 		</table>
-		<?= Pagination::create('admin/category/index', $model->Count, $p, $m) ?>
+		<?= Pagination::create('admin/user/index', $model->Count, $p, $m) ?>
 	</form>
 </div>

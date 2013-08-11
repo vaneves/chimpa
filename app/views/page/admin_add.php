@@ -12,6 +12,7 @@
 			<textarea name="Password" id="Password" type="password" class="input-block-level"></textarea>
 		</div>
 	</div>
-	<button type="submit" class="btn btn-inverse">Entrar</button>
-	<a href="~/admin/post" class="btn">Cancelar</a>
+	<button type="submit" class="btn btn-inverse">Publicar</button>
+	<button type="submit" class="btn" name="Drafit" value="1">Salvar Rascunho</button>
+	<a href="~/admin/page" class="btn">Cancelar</a>
 </form>

@@ -1,4 +1,4 @@
-<div class="pagination pagination-centered">
+<div class="pagination">
 <?php if($count > 1): ?>
 	<ul>
 		<?php if($p > 1): ?>
