@@ -1,3 +1,18 @@
+/* VALIDATION */
+label.valid {
+  width: 24px;
+  height: 24px;
+  background: url(assets/img/valid.png) center center no-repeat;
+  display: inline-block;
+  text-indent: -9999px;
+}
+label.error {
+  color: #b94a48;
+  padding: 2px 8px;
+  margin-top: 2px;
+}
+/* END VALIDATION */
+
 .form-signin {
 	max-width: 300px;
 	padding: 19px 29px 29px;

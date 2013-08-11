@@ -50,8 +50,10 @@ class UserController extends AdminController
 			try
 			{
 				$user = $this->_data($user);
+				$user->setPassword(Request::post('password'));
 				$user->save();
-				$this->_flash('alert', 'Usuário salvo com sucesso.');
+				Session::set('message', array('Class' => 'alert-success', 'Text' => 'Usuário criado com sucesso.'));
+				return $this->_redirect('~/admin/user');
 			} 
 			catch (ValidationException $e)
 			{
@@ -62,6 +64,9 @@ class UserController extends AdminController
 				$this->_flash('alert alert-error', 'Ocorreu um erro e não foi possível salvar o usuário.');
 			}
 		}
+		
+		$this->_set('label', 'Criar');
+		
 		return $this->_view($user);
 	}
 	
@@ -73,8 +78,10 @@ class UserController extends AdminController
 			try
 			{
 				$user = $this->_data($user);
+				$user->setPassword(Request::post('password'));
 				$user->save();
-				$this->_flash('alert', 'Usuário salvo com sucesso.');
+				Session::set('message', array('Class' => 'alert-success', 'Text' => 'Usuário salvo com sucesso.'));
+				return $this->_redirect('~/admin/user');
 			} 
 			catch (ValidationException $e)
 			{
@@ -85,22 +92,24 @@ class UserController extends AdminController
 				$this->_flash('alert alert-error', 'Ocorreu um erro e não foi possível salvar o usuário.');
 			}
 		}
+		
+		$this->_set('label', 'Editar');
+		
 		return $this->_view('admin_add', $user);
 	}
 	
-	public function admin_remove($id)
+	public function admin_remove()
 	{
-		$user = User::get($id);
-		if($user)
+		if (Request::isPost())
 		{
 			try
 			{
-				$user->delete();
-				$this->_flash('alert', 'Usuário salvo com sucesso.');
-			}
-			catch(Exception $e)
+				$ids = Request::post('items', array());
+				User::deleteAll($ids);
+				Session::set('message', array('Class' => 'alert-success', 'Text' => 'Usuários excluídos com sucesso.'));
+			} catch (Exception $e)
 			{
-				$this->_flash('alert alert-error', 'Ocorreu um erro e não foi possível excluir o usuário.');
+				$this->_flash('alert alert-error', 'Ocorreu um erro e não foi possível excluir os usuários.');
 			}
 		}
 		$this->_redirect('~/admin/user');

@@ -1,6 +1,6 @@
 <h1>Categorias <small><?= $label ?></small> </h1>
 <div class="row-fluid">
-	<form class="form-horizontal" method="POST" action="">
+	<form id="form-category" class="form-horizontal" method="POST" action="">
 		<div class="row-fluid">
 			<div class="control-group span12">
 				<label class="control-label" for="Name">Nome</label>

@@ -13,22 +13,58 @@ class User extends Model
 	
 	/**
 	 * @Column(Type="String")
+	 * @Label("Nome") 
+	 * @Required()
+	 * @Regex(Pattern="^(.{3,})$",Message="O nome deve possuir pelo menos 3 caractéres!")
 	 */
 	public $Name;
 	
 	/**
 	 * @Column(Type="String")
+	 * @Label("E-mail") 
+	 * @Required()
+	 * @Regex(Pattern="^([a-z0-9_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$",Message="E-mail em formato invalido!")
 	 */
 	public $Email;
 	
 	/**
 	 * @Column(Type="String")
+	 * @Label("Senha") 
+	 * @Required()
+	 * @Regex(Pattern="^(.{6,})$",Message="A senha deve possuir pelo menos 6 caractéres!") 
 	 */
 	public $Password;
 	
 	public static function login($email, $password)
 	{
 		$db = Database::factory();
-		return $db->User->single('Email = ? AND Password = ?', $email, md5($password));
+		return $db->User->single('Email = ? AND Password = ?', $email, self::encrypt($password));
+	}
+	
+	public function setPassword($password)
+	{
+		if($password)
+			$this->user = self::encrypt($password);
+	}
+	
+	public static function encrypt($password)
+	{
+		return md5($password);
+	}
+	
+	public static function deleteAll($ids)
+	{
+		$db = Database::factory();
+		
+		$list = '(';
+		foreach ($ids as $k => $i)
+		{
+			$list .= "?,";
+			$ids[$k] = (int) $i;
+		}
+		$list = substr($list, 0, strlen($list) - 1) . ')';
+		
+		$db->User->whereArray('Id IN ' . $list, $ids)->deleteAll();
+		$db->save();
 	}
 }
