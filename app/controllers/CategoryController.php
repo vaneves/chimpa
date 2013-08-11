@@ -6,13 +6,6 @@ class CategoryController extends AdminController
 	public function admin_index($p = 1, $m = 20, $o = 'Id', $t = 'DESC')
 	{	
 		$categories = Category::all($p, $m, $o, $t);
-		
-		//naum mostrar paginas além da conta
-		if($p > ceil($categories->Count / $m))
-		{
-			return $this->_redirect('~/admin/category');
-		}
-		
 		return $this->_view($categories);
 	}
 
@@ -26,7 +19,7 @@ class CategoryController extends AdminController
 				$category = $this->_data($category);
 				$category->Slug = Inflector::slugify($category->Name);
 				$category->save();
-				Session::set('message', array('Class' => 'alert-success', 'Text' => 'Categoria salva com sucesso.'));
+				$this->_flash('alert alert-success', 'Categoria salva com sucesso.');
 				return $this->_redirect('~/admin/category');
 			} catch (ValidationException $e)
 			{
@@ -52,7 +45,7 @@ class CategoryController extends AdminController
 				$category = $this->_data($category);
 				$category->Slug = Inflector::slugify($category->Name);
 				$category->save();
-				Session::set('message', array('Class' => 'alert-success', 'Text' => 'Categoria alterada com sucesso.'));
+				$this->_flash('alert alert-success', 'Categoria salva com sucesso.');
 				return $this->_redirect('~/admin/category');
 			} catch (ValidationException $e)
 			{
@@ -76,7 +69,7 @@ class CategoryController extends AdminController
 			{
 				$ids = Request::post('items', array());
 				Category::deleteAll($ids);
-				Session::set('message', array('Class' => 'alert-success', 'Text' => 'Categorias excluídas com sucesso.'));
+				$this->_flash('alert alert-success', 'Categorias excluídas com sucesso.');
 			} catch (Exception $e)
 			{
 				$this->_flash('alert alert-error', 'Ocorreu um erro e não foi possível excluir as categorias.');
