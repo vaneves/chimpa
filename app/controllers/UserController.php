@@ -38,7 +38,7 @@ class UserController extends AdminController
 	
 	public function admin_index($p = 1, $m = 20, $o = 'Id', $t = 'DESC')
 	{
-		$users = User::all($p, $m, $o, $t);
+		$users = User::search($p, $m, $o, $t, array(array('Id', '<>', Session::get('user')->Id)));
 		return $this->_view($users);
 	}
 	
@@ -50,7 +50,7 @@ class UserController extends AdminController
 			try
 			{
 				$user = $this->_data($user);
-				$user->setPassword(Request::post('password'));
+				$user->setPassword(Request::post('Password'));
 				$user->save();
 				$this->_flash('alert alert-success', 'Usuário criado com sucesso.');
 				return $this->_redirect('~/admin/user');
@@ -78,7 +78,7 @@ class UserController extends AdminController
 			try
 			{
 				$user = $this->_data($user);
-				$user->setPassword(Request::post('password'));
+				$user->setPassword(Request::post('Password'));
 				$user->save();
 				$this->_flash('alert alert-success', 'Usuário salvo com sucesso.');
 				return $this->_redirect('~/admin/user');

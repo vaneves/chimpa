@@ -44,7 +44,7 @@ class User extends Model
 	public function setPassword($password)
 	{
 		if($password)
-			$this->user = self::encrypt($password);
+			$this->Password = self::encrypt($password);
 	}
 	
 	public static function encrypt($password)
@@ -54,17 +54,72 @@ class User extends Model
 	
 	public static function deleteAll($ids)
 	{
-		$db = Database::factory();
-		
-		$list = '(';
-		foreach ($ids as $k => $i)
+		if ($ids) 
 		{
-			$list .= "?,";
-			$ids[$k] = (int) $i;
-		}
-		$list = substr($list, 0, strlen($list) - 1) . ')';
+			$db = Database::factory();
 		
-		$db->User->whereArray('Id IN ' . $list, $ids)->deleteAll();
-		$db->save();
+			$list = '(';
+			foreach ($ids as $k => $i)
+			{
+				$list .= "?,";
+				$ids[$k] = (int) $i;
+			}
+			$list = substr($list, 0, strlen($list) - 1) . ')';
+			
+			$db->User->whereArray('Id IN ' . $list, $ids)->deleteAll();
+			$db->save();
+
+			return true;
+		}
+
+		return false;
+	}
+
+	/**
+	 * Método do Active Record, retorna um array de instâncias do Model buscando do banco pelos parâmetros
+	 * @param	int		$p			número da página (ex.: 1 listará de 0 á 10)	
+	 * @param	int		$m			quantidade máxima de itens por página
+	 * @param	string	$o			coluna a ser ordenada
+	 * @param	string	$t			tipo de ordenação (asc ou desc)
+	 * @param	array	$filters	filtros utilizados para pesquisar no baco (ex.: array('Title' => '%example%'))
+	 * @return	array				retorna umma lista de instâncias de Model
+	 */
+	public static function search($p = 1, $m = 10, $o = 'Id', $t = 'asc', $filters = array())
+	{
+		$p = $m * (($p < 1 ? 1 : $p) - 1);
+
+		$db = Database::factory();
+		$entity = $db->User->orderBy($o, $t);
+		if(is_array($filters))
+		{
+			$fields = array();
+			$values = array();
+
+			foreach ($filters as $k => $v)
+			{
+				if(is_array($v))
+				{
+					$fields[] = $v[0] . ' ' . $v[1] . ' ?';
+					$values[] = $v[2];
+				}
+				else
+				{
+					if(preg_match('/^%(.*)%$/', $v) !== 0)
+					{
+						$fields[] = $k .' LIKE ?';
+					}
+					else
+					{
+						$fields[] = $k .' = ?';
+					}
+
+					$values[] = $v;
+				}
+			}
+				
+			$fields = implode(' OR ', $fields);
+			$entity->whereArray($fields, $values);
+		}
+		return $entity->paginate($p, $m);
 	}
 }
