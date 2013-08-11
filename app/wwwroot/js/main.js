@@ -9,6 +9,21 @@ $(document).ready(function(){
 		});
 	});
 	
+	//Category add validation
+	$('#form-category').validate({
+		rules: {
+			Name: {
+				required: true,
+				minlength: 3
+			}
+		},
+		messages: {
+			Name: {
+				required: 'Você deve informar um nome para a categoria.',
+				minlength: 'O nome da categoria deve ter pelo menos 3 caractéres.'
+			}
+		}
+	});
 	
 	// User add validation
 	$('#user-form').validate(
