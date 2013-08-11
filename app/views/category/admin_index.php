@@ -24,7 +24,7 @@
 				</tr>
 			</thead>
 			<tbody>
-				<?php if ($model->Count): ?>
+				<?php if ($model->Data): ?>
 					<?php foreach ($model->Data as $c): ?>
 						<tr>
 							<td><input type="checkbox" name="items[]" value="<?= $c->Id ?>" /></td>
