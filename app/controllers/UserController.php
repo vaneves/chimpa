@@ -52,7 +52,7 @@ class UserController extends AdminController
 				$user = $this->_data($user);
 				$user->setPassword(Request::post('password'));
 				$user->save();
-				Session::set('message', array('Class' => 'alert-success', 'Text' => 'Usuário criado com sucesso.'));
+				$this->_flash('alert alert-success', 'Usuário criado com sucesso.');
 				return $this->_redirect('~/admin/user');
 			} 
 			catch (ValidationException $e)
@@ -80,7 +80,7 @@ class UserController extends AdminController
 				$user = $this->_data($user);
 				$user->setPassword(Request::post('password'));
 				$user->save();
-				Session::set('message', array('Class' => 'alert-success', 'Text' => 'Usuário salvo com sucesso.'));
+				$this->_flash('alert alert-success', 'Usuário salvo com sucesso.');
 				return $this->_redirect('~/admin/user');
 			} 
 			catch (ValidationException $e)
@@ -106,7 +106,7 @@ class UserController extends AdminController
 			{
 				$ids = Request::post('items', array());
 				User::deleteAll($ids);
-				Session::set('message', array('Class' => 'alert-success', 'Text' => 'Usuários excluídos com sucesso.'));
+				$this->_flash('alert alert-success', 'Usuários excluídos com sucesso.');
 			} catch (Exception $e)
 			{
 				$this->_flash('alert alert-error', 'Ocorreu um erro e não foi possível excluir os usuários.');
