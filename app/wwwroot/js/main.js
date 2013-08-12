@@ -87,11 +87,11 @@ $(document).ready(function(){
 		var self = $(this);
 		if(self.val())
 		{
-			$('#Repassword, #OldPassword-group').show('fast');
+			$('#Repassword-group, #OldPassword-group').show('fast');
 		}
 		else
 		{
-			$('#Repassword, #OldPassword-group').hide('fast');
+			$('#Repassword-group, #OldPassword-group').hide('fast');
 		}
 	});
 });
