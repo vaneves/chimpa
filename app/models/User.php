@@ -35,16 +35,52 @@ class User extends Model
 	 */
 	public $Password;
 	
+	/**
+	 * @Column(Type="Int")
+	 */
+	public $Role;
+	
+	public function humanize()
+	{
+		$rId = $this->Role;
+		$this->Role = new stdClass();
+		if(!$rId)
+			$rId = 1;
+		$this->Role->Id = $rId;
+		$this->Role->Name = self::$_roles[$rId];
+		
+		return $this;
+	}
+	
+	public static $_roles = array(
+		1 => 'Administrador',
+		10 => 'Gerente',
+		20 => 'Autor'
+	);
+	
+	public static $_baseRoles = array(
+		1 => 'Admin',
+		10 => 'Manager',
+		20 => 'Author'
+	);
+	
+	public function getBaseRole()
+	{
+		return self::$_baseRoles[$this->Role];
+	}
+	
 	public static function login($email, $password)
 	{
 		$db = Database::factory();
 		return $db->User->single('Email = ? AND Password = ?', $email, self::encrypt($password));
 	}
 	
-	public function setPassword($password)
+	public function setPassword($password, $default)
 	{
 		if($password)
 			$this->Password = self::encrypt($password);
+		elseif($default)
+			$this->Password = $default;
 	}
 	
 	public static function encrypt($password)

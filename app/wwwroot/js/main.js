@@ -37,8 +37,7 @@ $(document).ready(function(){
 				email: true
 			},
 			Password: {
-				minlength: 6,
-				required: true
+				minlength: 6
 			}
 		},
 		messages: {

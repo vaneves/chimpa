@@ -3,8 +3,7 @@
 class AdminController extends Controller
 {
 	/**
-	 * @Auth("user")
-	 * @Master("admin")
+	 * @Auth("Admin","Manager","Author")
 	 */
 	public function __construct()
 	{

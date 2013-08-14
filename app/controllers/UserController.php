@@ -2,6 +2,14 @@
 class UserController extends AdminController
 {
 	/**
+	 *@Auth("Admin") 
+	 */
+	public function __construct()
+	{
+		parent::__construct();
+	}
+	
+	/**
 	 * @Auth("*")
 	 */
 	public function admin_login()
@@ -18,7 +26,7 @@ class UserController extends AdminController
 			if($user)
 			{
 				Session::set('user', $user);
-				Auth::set('user');
+				Auth::set($user->getBaseRole());
 				$this->_redirect('~/admin/post');
 			}
 			else
@@ -29,6 +37,9 @@ class UserController extends AdminController
 		return $this->_view();
 	}
 	
+	/**
+	 * @Auth("*")
+	 */
 	public function admin_logout()
 	{
 		Session::clear();
@@ -36,7 +47,7 @@ class UserController extends AdminController
 		return $this->_redirect('~/admin/');
 	}
 	
-	public function admin_index($p = 1, $m = 20, $o = 'Id', $t = 'DESC')
+	public function admin_index($p = 1, $m = 20, $o = 'Name', $t = 'ASC')
 	{
 		$users = User::search($p, $m, $o, $t, array(array('Id', '<>', Session::get('user')->Id)));
 		return $this->_view($users);
@@ -67,6 +78,9 @@ class UserController extends AdminController
 		
 		$this->_set('label', 'Criar');
 		
+		$user->humanize();
+		unset(User::$_roles[$user->Role->Id]);
+		
 		return $this->_view($user);
 	}
 	
@@ -77,8 +91,9 @@ class UserController extends AdminController
 		{
 			try
 			{
+				$oldPass = $user->Password;
 				$user = $this->_data($user);
-				$user->setPassword(Request::post('Password'));
+				$user->setPassword(Request::post('Password'), $oldPass);
 				$user->save();
 				$this->_flash('alert alert-success', 'Usuário salvo com sucesso.');
 				return $this->_redirect('~/admin/user');
@@ -94,6 +109,9 @@ class UserController extends AdminController
 		}
 		
 		$this->_set('label', 'Editar');
+		
+		$user->humanize();
+		unset(User::$_roles[$user->Role->Id]);
 		
 		return $this->_view('admin_add', $user);
 	}
@@ -115,6 +133,9 @@ class UserController extends AdminController
 		$this->_redirect('~/admin/user');
 	}
 
+	/**
+	 * @Auth("Admin","Manager","Author")
+	 */
 	public function admin_me()
 	{
 		$user = Session::get('user');

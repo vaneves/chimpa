@@ -3,7 +3,14 @@ class PostController extends AdminController
 {
 	public function admin_index($p = 1, $m = 20, $o = 'Id', $t = 'DESC')
 	{
-		$posts = Post::all($p, $m, $o, $t);
+		$filters = array();
+		
+		if(Auth::is(User::$_baseRoles[20]))
+		{
+			$filters['UserId'] = Session::get('user')->Id;
+		}
+		
+		$posts = Post::search($p, $m, $o, $t, $filters);
 		return $this->_view($posts);
 	}
 	

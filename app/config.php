@@ -36,7 +36,7 @@ Config::set('database', array(
 /**
  * Master Page padrão
  */
-Config::set('default_master', 'template');
+Config::set('default_master', 'admin');
 
 /**
  * Controller padrão

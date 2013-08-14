@@ -35,3 +35,7 @@ header
 {
 	margin-bottom: 20px;
 }
+.error.valid
+{
+	display: none !important;
+}

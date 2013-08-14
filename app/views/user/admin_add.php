@@ -17,10 +17,21 @@
 				</div>
 			</div>
 			<div class="row-fluid">
-				<div class="control-group span6">
+				<div class="control-group span4">
 					<label for="Password" class="control-label">Senha</label>
 					<div class="controls">
 						<input id="Password" class="span12" name="Password" type="password" value="" />
+					</div>
+				</div>
+				<div class="control-group span2">
+					<label for="Role" class="control-label">Função</label>
+					<div class="controls">
+						<select id="Role" name="Role">
+							<option value="<?= $model->Role->Id ?>"><?= $model->Role->Name ?></option>
+							<?php foreach (User::$_roles as $k => $v): ?>
+							<option value="<?= $k ?>"><?= $v ?></option>
+							<?php endforeach; ?>
+						</select>
 					</div>
 				</div>
 			</div>

@@ -2,6 +2,13 @@
 
 class CategoryController extends AdminController
 {
+	/**
+	 * @Auth("Admin","Manager") 
+	 */
+	public function __construct()
+	{
+		parent::__construct();
+	}
 
 	public function admin_index($p = 1, $m = 20, $o = 'Id', $t = 'DESC')
 	{	

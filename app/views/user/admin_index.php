@@ -26,7 +26,7 @@
 			</thead>
 			<tbody>
 				<?php if($model->Data): ?>
-					<?php foreach ($model->Data as $u): ?>
+					<?php foreach ($model->Data as $u): $u->humanize() ?>
 						<tr>
 							<td><input type="checkbox" name="items[]" value="<?= $u->Id ?>"></td>
 							<td>
@@ -34,7 +34,7 @@
 								<a href="~/admin/user/edit/<?= $u->Id ?>"><?= $u->Name ?></a>
 							</td>
 							<td><?= $u->Email ?></td>
-							<td>-</td>
+							<td><?= $u->Role->Name ?></td>
 						</tr>
 					<?php endforeach; ?>
 				<?php else: ?>
