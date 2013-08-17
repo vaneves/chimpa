@@ -51,10 +51,27 @@ class Post extends Model
 	 */
 	public $Status;
 	
-	public static function allByCategoryId($id, $p = 1, $m = 10, $o = 'PublicatedDate', $t = 'DESC')
+	/**
+	 * Retorna as categorias de um post.
+	 * @param int		$p	Pagina de resultados
+	 * @param int		$m	Quantidade máxima de resultados retornados
+	 * @param string	$o	Coluna para ordenação
+	 * @param string	$t	Tipo da ordenação
+	 * @return array		Array contendo as categorias desejadas
+	 */
+	public function getCategories($p = 1, $m = 10, $o = 'Id', $t = 'DESC')
 	{
-		$p = ($p < 1 ? 1 : $p) - 1;
+		return ViewCategory::allByPost($this->Id, $p, $m, $o, $t);
+	}
+	
+	/**
+	 * Retorna um post pelo slug.
+	 * @param	string	$slug	Slug do post retornado.
+	 * @return	mixed			resultado encontrado.
+	 */
+	public static function getBySlug($slug)
+	{
 		$db = Database::factory();
-		return $db->Post->where('CategoryId = ?', $id)->orderBy($o, $t)->paginate($p, $m);
+		return $db->Post->single('Slug = ?', $slug);
 	}
 }

@@ -23,6 +23,19 @@ class Category extends Model
 	 * @Required()
 	 */
 	public $Slug;
+	
+	/**
+	 * Retorna os posts de uma categoria.
+	 * @param int		$p	Pagina de resultados
+	 * @param int		$m	Quantidade máxima de resultados retornados
+	 * @param string	$o	Coluna para ordenação
+	 * @param string	$t	Tipo da ordenação
+	 * @return array		Array contendo posts desejados
+	 */
+	public function getPosts($p = 1, $m = 10, $o = 'UpdatedDate', $t = 'DESC')
+	{
+		return ViewPost::allByCategory($this->Id, $p, $m, $o, $t);
+	}
 
 	public static function deleteAll($ids)
 	{
@@ -39,5 +52,15 @@ class Category extends Model
 		$db->Category->whereArray('Id IN ' . $list, $ids)->deleteAll();
 		$db->save();
 	}
-
+	
+	/**
+	 * Retorna uma categoria pelo slug.
+	 * @param	string	$slug	slug da categoria desejada.
+	 * @return	mixed			resultado encontrado.
+	 */
+	public static function getBySlug($slug)
+	{
+		$db = Database::factory();
+		return $db->Category->single('Slug = ?', $slug);
+	}
 }
