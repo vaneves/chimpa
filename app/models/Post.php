@@ -114,4 +114,19 @@ class Post extends Model
 		$db->PostCategory->where('PostId = ?', $this->Id)->deleteAll();
 		$db->save();
 	}
+	
+	public static function deleteAll($ids)
+	{	
+		$list = '(';
+		foreach ($ids as $k => $i)
+		{
+			$list .= '?,';
+			$ids[$k] = (int)$i;
+		}
+		$list = substr($list, 0, strlen($list) - 1) . ')';
+	
+		$db = Database::factory();
+		$db->Post->whereArray('Id IN ' . $list, $ids)->deleteAll();
+		$db->save();
+	}
 }

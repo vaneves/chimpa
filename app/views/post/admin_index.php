@@ -8,7 +8,7 @@
 			</div>
 			<div class="clearfix"></div>
 		</div>
-		<h1>Páginas</h1>
+		<h1>Posts</h1>
 		<table class="table table-striped">
 			<caption>
 				<div class="btn-group pull-right">

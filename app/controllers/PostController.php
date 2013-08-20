@@ -101,19 +101,18 @@ class PostController extends AdminController
 		return $this->_view('admin_add', $post);
 	}
 	
-	public function admin_remove($id)
+	public function admin_remove()
 	{
-		$post = Post::get($id);
-		if($post)
+		if (Request::isPost())
 		{
 			try
 			{
-				$post->delete();
-				$this->_flash('alert', 'Post salvo com sucesso.');
-			}
-			catch(Exception $e)
+				$ids = Request::post('items', array());
+				Post::deleteAll($ids);
+				$this->_flash('alert alert-success', 'Posts excluídos com sucesso.');
+			} catch (Exception $e)
 			{
-				$this->_flash('alert alert-error', 'Ocorreu um erro e não foi possível excluir o post.');
+				$this->_flash('alert alert-error', 'Ocorreu um erro e não foi possível excluir as páginas.');
 			}
 		}
 		$this->_redirect('~/admin/post');
