@@ -117,4 +117,21 @@ class PostController extends AdminController
 		}
 		$this->_redirect('~/admin/post');
 	}
+	
+	public function admin_publish()
+	{
+		if (Request::isPost())
+		{
+			try
+			{
+				$ids = Request::post('items', array());
+				Post::publishAll($ids);
+				$this->_flash('alert alert-success', 'Posts publicados com sucesso.');
+			} catch (Exception $e)
+			{
+				$this->_flash('alert alert-error', 'Ocorreu um erro e não foi possível excluir as páginas.');
+			}
+		}
+		$this->_redirect('~/admin/post');
+	}
 }

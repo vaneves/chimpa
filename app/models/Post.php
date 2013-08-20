@@ -129,4 +129,27 @@ class Post extends Model
 		$db->Post->whereArray('Id IN ' . $list, $ids)->deleteAll();
 		$db->save();
 	}
+	
+	public static function publishAll($ids)
+	{	
+		$list = '(';
+		foreach ($ids as $k => $i)
+		{
+			$list .= '?,';
+			$ids[$k] = (int)$i;
+		}
+		$list = substr($list, 0, strlen($list) - 1) . ')';
+	
+		$db = Database::factory();
+		$posts = $db->Post->whereArray('Id IN ' . $list, $ids)->all();
+		
+		foreach ($posts as $p)
+		{
+			$p->PublicatedDate = time();
+			$p->Status = 1;
+			$db->Post->update($p);
+		}
+		
+		$db->save();
+	}
 }

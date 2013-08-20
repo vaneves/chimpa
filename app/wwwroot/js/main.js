@@ -27,6 +27,13 @@ $(document).ready(function(){
 		}
 	});
 	
+	$('#form-post #btn-publish').click(function(e){
+		e.preventDefault();
+		
+		var self = $(this);
+		$('#form-post').attr('action', self.attr('href')).submit();
+	});
+	
 	// User add validation
 	$('#user-form').validate({
 		rules: {

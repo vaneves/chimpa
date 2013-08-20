@@ -1,5 +1,5 @@
 <div class="row-fluid">
-	<form action="~/admin/post/remove" method="POST">
+	<form id="form-post" action="~/admin/post/remove" method="POST">
 		<div class="alert alert-warning" id="post-remove-confirm" style="display: none;">
 			<span>Tem certeza que deseja remover estas páginas?</span>
 			<div class="btn-navbar pull-right">
@@ -11,10 +11,16 @@
 		<h1>Posts</h1>
 		<table class="table table-striped">
 			<caption>
-				<div class="btn-group pull-right">
-					<a href="~/admin/post/add" class="btn btn-inverse"><i class="icon icon-plus icon-white"></i> Novo</a>
-					<a href="#post-remove-confirm" data-toggle="confirm" class="btn">Excluir</a>
+				<div class="btn-navbar pull-right">
+					<div class="btn-group">
+						<a href="~/admin/post/add" class="btn btn-inverse"><i class="icon icon-plus icon-white"></i> Novo</a>
+						<a href="#post-remove-confirm" data-toggle="confirm" class="btn">Excluir</a>
+					</div>
+					<div class="btn-group">
+						<a id="btn-publish" href="~/admin/post/publish" class="btn">Publicar</a>
+					</div>
 				</div>
+				
 			</caption>
 			<thead>
 				<tr>
