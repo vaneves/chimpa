@@ -63,4 +63,10 @@ class Category extends Model
 		$db = Database::factory();
 		return $db->Category->single('Slug = ?', $slug);
 	}
+	
+	public static function findAll()
+	{
+		$db = Database::factory();
+		return $db->Category->all();
+	}
 }

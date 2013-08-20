@@ -38,6 +38,8 @@ class PostController extends AdminController
 				}
 				
 				$post->save();
+				$post->setCategories(Request::post('categories'));
+				
 				$this->_flash('alert alert-success', 'Post salvo com sucesso.');
 			} 
 			catch (ValidationException $e)
@@ -51,6 +53,8 @@ class PostController extends AdminController
 		}
 		
 		$this->_set('label', 'Criar');
+		$this->_set('categories', Category::findAll());
+		$this->_set('selectedCategories', $post->getCategoriesIds());
 		return $this->_view($post);
 	}
 	
@@ -77,6 +81,8 @@ class PostController extends AdminController
 				}
 				
 				$post->save();
+				$post->unsetCategories();
+				$post->setCategories(Request::post('categories'));
 				$this->_flash('alert alert-success', 'Post salvo com sucesso.');
 			} 
 			catch (ValidationException $e)
@@ -90,6 +96,8 @@ class PostController extends AdminController
 		}
 		
 		$this->_set('label', 'Editar');
+		$this->_set('categories', Category::findAll());
+		$this->_set('selectedCategories', $post->getCategoriesIds());
 		return $this->_view('admin_add', $post);
 	}
 	

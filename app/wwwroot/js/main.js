@@ -9,6 +9,8 @@ $(document).ready(function(){
 		});
 	});
 	
+	$('select[data-toggle="chosen-multiple"]').chosen();
+	
 	//Category add validation
 	$('#form-category').validate({
 		rules: {

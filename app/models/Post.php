@@ -64,6 +64,20 @@ class Post extends Model
 		return ViewCategory::allByPost($this->Id, $p, $m, $o, $t);
 	}
 	
+	public function getCategoriesIds()
+	{
+		$db = Database::factory();
+		$pcs = $db->PostCategory->all('PostId = ?', $this->Id);
+		$postCategories = array();
+		
+		foreach ($pcs as $pc)
+		{
+			$postCategories[] = $pc->CategoryId;
+		}
+		
+		return $postCategories;
+	}
+	
 	/**
 	 * Retorna um post pelo slug.
 	 * @param	string	$slug	Slug do post retornado.
@@ -81,5 +95,23 @@ class Post extends Model
 		$this->CreatedDate = date($dateFormat, $this->CreatedDate);
 		$this->PublicatedDate = date($dateFormat, $this->PublicatedDate);
 		$this->UpdatedDate = date($dateFormat, $this->UpdatedDate);
+	}
+	
+	public function setCategories($categories)
+	{
+		$db = Database::factory();
+		$postCategories = $db->PostCategory;
+		foreach ($categories as $c)
+		{
+			$postCategories->insert(new PostCategory($this->Id, $c));
+		}
+		$db->save();
+	}
+	
+	public function unsetCategories()
+	{
+		$db = Database::factory();
+		$db->PostCategory->where('PostId = ?', $this->Id)->deleteAll();
+		$db->save();
 	}
 }

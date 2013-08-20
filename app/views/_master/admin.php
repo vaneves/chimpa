@@ -9,6 +9,7 @@
 
 		<link href="~/css/bootstrap.css" rel="stylesheet">
 		<link href="~/css/bootstrap-responsive.css" rel="stylesheet">
+		<link href="~/css/chosen.min.css" rel="stylesheet">
 		<link href="~/css/style.css" rel="stylesheet">
 	</head>
 
@@ -98,6 +99,7 @@
 		<script src="~/js/jquery.min.js"></script>
 		<script src="~/js/bootstrap.min.js"></script>
 		<script src="~/js/jquery.validate.min.js"></script>
+		<script src="~/js/chosen.jquery.min.js"></script>
 		<script src="~/js/ckeditor/ckeditor.js"></script>
 		<script src="~/js/main.js"></script>
 	</body>
