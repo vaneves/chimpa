@@ -37,8 +37,12 @@
 										<a href="#" class="dropdown-toggle" data-toggle="dropdown">Novo <b class="caret"></b></a>
 										<ul class="dropdown-menu">
 											<li><a href="~/admin/post/add">Post</a></li>
+											<?php if (Auth::is('Admin', 'Manager')): ?>
 											<li><a href="~/admin/page/add">Página</a></li>
+											<?php endif ?>
+											<?php if (Auth::is('Admin')): ?>
 											<li><a href="~/admin/user/add">Usuário</a></li>
+											<?php endif ?>
 										</ul>
 									</li>
 								</ul>
@@ -67,9 +71,13 @@
 				<div class="span3">
 					<ul class="nav nav-tabs nav-stacked">
 						<li <?= $active === 'post' ? 'class="active"' : ''  ?>><a href="~/admin/post/">Posts</a></li>
+						<?php if (Auth::is('Admin', 'Manager')): ?>
 						<li <?= $active === 'category' ? 'class="active"' : ''  ?>><a href="~/admin/category/">Categorias</a></li>
 						<li <?= $active === 'page' ? 'class="active"' : ''  ?>><a href="~/admin/page/">Páginas</a></li>
+						<?php endif; ?>
+						<?php if (Auth::is('Admin')): ?>
 						<li <?= $active === 'user' ? 'class="active"' : ''  ?>><a href="~/admin/user/">Usuários</a></li>
+						<?php endif; ?>
 					</ul>
 				</div>
 				<div class="span9">
