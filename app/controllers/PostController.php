@@ -10,7 +10,7 @@ class PostController extends AdminController
 			$filters['UserId'] = Session::get('user')->Id;
 		}
 		
-		$posts = Post::search($p, $m, $o, $t, $filters);
+		$posts = ViewPost::search($p, $m, $o, $t, $filters);
 		return $this->_view($posts);
 	}
 	
@@ -22,8 +22,23 @@ class PostController extends AdminController
 			try
 			{
 				$post = $this->_data($post);
+				$post->Content = strip_tags(Request::post('Content'), Config::get('html_safe_list'));
+				$post->UserId = Session::get('user')->Id;
+				$post->CreatedDate = time();
+				$post->Slug = Inflector::slugify(Request::post('Title'));
+				
+				if(Request::post('Draft'))
+				{
+					$post->Status = 0;
+				}
+				else
+				{
+					$post->PublicatedDate = time();
+					$post->Status = 1;
+				}
+				
 				$post->save();
-				$this->_flash('alert', 'Post salvo com sucesso.');
+				$this->_flash('alert alert-success', 'Post salvo com sucesso.');
 			} 
 			catch (ValidationException $e)
 			{
@@ -34,6 +49,8 @@ class PostController extends AdminController
 				$this->_flash('alert alert-error', 'Ocorreu um erro e não foi possível salvar o post.');
 			}
 		}
+		
+		$this->_set('label', 'Criar');
 		return $this->_view($post);
 	}
 	
@@ -45,8 +62,11 @@ class PostController extends AdminController
 			try
 			{
 				$post = $this->_data($post);
+				$post->Content = strip_tags(Request::post('Content'), Config::get('html_safe_list'));
+				$post->UserId = Session::get('user')->Id;
+				$post->UpdatedDate = time();
 				$post->save();
-				$this->_flash('alert', 'Post salvo com sucesso.');
+				$this->_flash('alert alert-success', 'Post salvo com sucesso.');
 			} 
 			catch (ValidationException $e)
 			{
@@ -57,6 +77,8 @@ class PostController extends AdminController
 				$this->_flash('alert alert-error', 'Ocorreu um erro e não foi possível salvar o post.');
 			}
 		}
+		
+		$this->_set('label', 'Editar');
 		return $this->_view('admin_add', $post);
 	}
 	

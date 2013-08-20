@@ -21,6 +21,11 @@ class ViewPost extends Post
 	public $CategorySlug;
 	
 	/**
+	 * @Column(Type="String")
+	 */
+	public $Author;
+	
+	/**
 	 * Retorna os posts de uma categoria pelo id.
 	 * @param int		$id	Id da categoria desejada
 	 * @param int		$p	Pagina de resultados

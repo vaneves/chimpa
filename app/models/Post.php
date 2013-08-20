@@ -74,4 +74,12 @@ class Post extends Model
 		$db = Database::factory();
 		return $db->Post->single('Slug = ?', $slug);
 	}
+	
+	public function humanize()
+	{
+		$dateFormat = Config::get('date_format');
+		$this->CreatedDate = date($dateFormat, $this->CreatedDate);
+		$this->PublicatedDate = date($dateFormat, $this->PublicatedDate);
+		$this->UpdatedDate = date($dateFormat, $this->UpdatedDate);
+	}
 }

@@ -1,17 +1,12 @@
-<h1>Adicionar Post</h1>
+<h1>Post <small><?= $label ?></small></h1>
 <form method="post" action="">
-	<div class="control-group">
-		<label class="control-label" for="Email">Título</label>
-		<div class="controls">
-			<input name="Email" id="Email" value="<?= Request::post('Email') ?>" type="text" class="input-block-level">
-		</div>
-	</div>				
-	<div class="control-group">
-		<label class="control-label" for="Password">Senha</label>
-		<div class="controls">
-			<textarea name="Password" id="Password" type="password" class="input-block-level"></textarea>
-		</div>
-	</div>
-	<button type="submit" class="btn btn-inverse">Entrar</button>
-	<a href="~/admin/post" class="btn">Cancelar</a>
+	<?= BForm::input('Título', 'Title', $model->Title, 'input-block-level', array('placeholder' => 'Digite o título aqui')) ?>
+	<?= BForm::textarea('Conteúdo', 'Content', $model->Content, 'input-block-level ckeditor') ?>
+	<?php if($label == 'Criar' || $model->Status === 0): ?>
+	<button type="submit" class="btn btn-inverse">Publicar</button>
+	<button type="submit" class="btn" name="Draft" value="1">Salvar Rascunho</button>
+	<?php else: ?>
+	<button type="submit" class="btn btn-inverse">Atualizar</button>
+	<?php endif ?>
+	<a href="~/admin/post" class="help-inline">Voltar</a>
 </form>
