@@ -5,9 +5,16 @@ class PostController extends AdminController
 	{
 		$filters = array();
 		
-		if(Auth::is(User::$_baseRoles[20]))
+		if(Auth::is('Author'))
 		{
 			$filters['UserId'] = Session::get('user')->Id;
+		}
+		
+		$q = Request::get('q');
+		if($q)
+		{
+			$filters['Title'] = "%$q%";
+			$filters['Author'] = "%$q%";
 		}
 		
 		$posts = ViewPost::search($p, $m, $o, $t, $filters);
@@ -61,6 +68,13 @@ class PostController extends AdminController
 	public function admin_edit($id)
 	{
 		$post = Post::get($id);
+		
+		if(!$post->isAuthorizedManager(Session::get('user')->Id))
+		{
+			$this->_flash('alert', 'Você não pode editar este post.');
+			return $this->_redirect('~/admin/post');
+		}
+		
 		if(Request::isPost())
 		{
 			try
@@ -112,7 +126,7 @@ class PostController extends AdminController
 				$this->_flash('alert alert-success', 'Posts excluídos com sucesso.');
 			} catch (Exception $e)
 			{
-				$this->_flash('alert alert-error', 'Ocorreu um erro e não foi possível excluir as páginas.');
+				$this->_flash('alert alert-error', 'Ocorreu um erro e não foi possível excluir os posts.');
 			}
 		}
 		$this->_redirect('~/admin/post');
@@ -129,7 +143,7 @@ class PostController extends AdminController
 				$this->_flash('alert alert-success', 'Posts publicados com sucesso.');
 			} catch (Exception $e)
 			{
-				$this->_flash('alert alert-error', 'Ocorreu um erro e não foi possível excluir as páginas.');
+				$this->_flash('alert alert-error', 'Ocorreu um erro e não foi possível publicar os posts.');
 			}
 		}
 		$this->_redirect('~/admin/post');

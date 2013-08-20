@@ -13,6 +13,12 @@
 			<caption>
 				<div class="btn-navbar pull-right">
 					<div class="btn-group">
+						<div class="input-append">
+							<input id="input-search" type="text" name="q" value="" />
+							<a id="btn-search" href="javascript:void(0);" class="btn" type="button"><i class="icon icon-search"></i></a>
+						</div>
+					</div>
+					<div class="btn-group">
 						<a href="~/admin/post/add" class="btn btn-inverse"><i class="icon icon-plus icon-white"></i> Novo</a>
 						<a href="#post-remove-confirm" data-toggle="confirm" class="btn">Excluir</a>
 					</div>
@@ -20,7 +26,7 @@
 						<a id="btn-publish" href="~/admin/post/publish" class="btn">Publicar</a>
 					</div>
 				</div>
-				
+
 			</caption>
 			<thead>
 				<tr>
@@ -31,7 +37,7 @@
 				</tr>
 			</thead>
 			<tbody>
-				<?php if($model->Data): ?>
+				<?php if ($model->Data): ?>
 					<?php foreach ($model->Data as $p): $p->humanize() ?>
 						<tr>
 							<td><input type="checkbox" name="items[]" value="<?= $p->Id ?>"></td>

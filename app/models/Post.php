@@ -152,4 +152,9 @@ class Post extends Model
 		
 		$db->save();
 	}
+	
+	public function isAuthorizedManager($userId)
+	{
+		return $this->UserId == $userId || Auth::is('Manager', 'Admin');
+	}
 }

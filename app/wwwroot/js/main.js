@@ -29,9 +29,21 @@ $(document).ready(function(){
 	
 	$('#form-post #btn-publish').click(function(e){
 		e.preventDefault();
-		
 		var self = $(this);
 		$('#form-post').attr('action', self.attr('href')).submit();
+	});
+	
+	$('#form-post #btn-search').click(function(e){
+		e.preventDefault();
+		$('#form-post').attr('action', '').attr('method', 'GET').submit();
+	});
+	
+	$('#form-post #input-search').keypress(function(e){
+		var code = (e.keyCode ? e.keyCode : e.which);
+		if(code == 13) { //Enter keycode
+			e.preventDefault();
+			$('#form-post #btn-search').click();
+		}
 	});
 	
 	// User add validation
