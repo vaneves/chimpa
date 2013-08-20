@@ -65,6 +65,17 @@ class PostController extends AdminController
 				$post->Content = strip_tags(Request::post('Content'), Config::get('html_safe_list'));
 				$post->UserId = Session::get('user')->Id;
 				$post->UpdatedDate = time();
+				
+				if(Request::post('Draft'))
+				{
+					$post->Status = 0;
+				}
+				else
+				{
+					$post->PublicatedDate = time();
+					$post->Status = 1;
+				}
+				
 				$post->save();
 				$this->_flash('alert alert-success', 'Post salvo com sucesso.');
 			} 
