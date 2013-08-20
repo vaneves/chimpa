@@ -8,6 +8,8 @@ class CategoryController extends AdminController
 	public function __construct()
 	{
 		parent::__construct();
+		
+		$this->_set('active', 'category');
 	}
 
 	public function admin_index($p = 1, $m = 20, $o = 'Id', $t = 'DESC')

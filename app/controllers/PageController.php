@@ -7,6 +7,8 @@ class PageController extends AdminController
 	public function __construct()
 	{
 		parent::__construct();
+		
+		$this->_set('active', 'page');
 	}
 	
 	public function admin_index($p = 1, $m = 20, $o = 'Id', $t = 'DESC')

@@ -7,6 +7,8 @@ class UserController extends AdminController
 	public function __construct()
 	{
 		parent::__construct();
+		
+		$this->_set('active', 'user');
 	}
 	
 	/**

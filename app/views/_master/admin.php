@@ -66,10 +66,10 @@
 				<?php if (Auth::isLogged()): ?>
 				<div class="span3">
 					<ul class="nav nav-tabs nav-stacked">
-						<li class="active"><a href="~/admin/post/">Posts</a></li>
-						<li><a href="~/admin/category/">Categorias</a></li>
-						<li><a href="~/admin/page/">Páginas</a></li>
-						<li><a href="~/admin/user/">Usuários</a></li>
+						<li <?= $active === 'post' ? 'class="active"' : ''  ?>><a href="~/admin/post/">Posts</a></li>
+						<li <?= $active === 'category' ? 'class="active"' : ''  ?>><a href="~/admin/category/">Categorias</a></li>
+						<li <?= $active === 'page' ? 'class="active"' : ''  ?>><a href="~/admin/page/">Páginas</a></li>
+						<li <?= $active === 'user' ? 'class="active"' : ''  ?>><a href="~/admin/user/">Usuários</a></li>
 					</ul>
 				</div>
 				<div class="span9">

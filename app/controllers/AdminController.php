@@ -7,5 +7,6 @@ class AdminController extends Controller
 	 */
 	public function __construct()
 	{
+		$this->_set('active', 'post');
 	}
 }
