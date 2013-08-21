@@ -9,11 +9,15 @@
 	</div>
 	<h1>Categorias</h1>
 	<div class="row-fluid">
-		<table class="table table-striped table-bordered2">
+		<table class="table table-striped">
 			<caption>
-				<div class="btn-group pull-right">
-					<a href="~/admin/category/add" class="btn btn-inverse"><i class="icon icon-plus icon-white"></i> Nova</a>
-					<a href="#category-remove-confirm" data-toggle="confirm" class="btn">Excluir</a>
+				<div class="btn-navbar pull-left">
+					<div class="btn-group">
+						<a href="~/admin/category/add" class="btn btn-inverse"><i class="icon icon-plus icon-white"></i> Nova</a> 
+					</div>
+					<div class="btn-group">
+						<a href="#category-remove-confirm" data-toggle="confirm" class="btn">Excluir</a>
+					</div>
 				</div>
 			</caption>
 			<thead>

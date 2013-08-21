@@ -22,7 +22,7 @@
 			</div>
 			<hr>
 			<footer>
-				<p>© <?= Config::get('site_name') ?> <?= date('Y') ?></p>
+				<p class="muted"><?= Config::get('site_name') ?> - Feito com <a href="http://triladophp.org">Trilado Framework</a>.</p>
 			</footer>
 		</div>
 		<script src="~/js/jquery.min.js"></script>

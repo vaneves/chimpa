@@ -11,6 +11,17 @@
 		<h1>Posts</h1>
 		<table class="table table-striped">
 			<caption>
+				<div class="btn-navbar pull-left">
+					<div class="btn-group">
+						<a href="~/admin/post/add" class="btn btn-inverse"><i class="icon icon-plus icon-white"></i> Novo</a>
+					</div>
+					<div class="btn-group">
+						<a href="#post-remove-confirm" data-toggle="confirm" class="btn">Excluir</a>
+					</div>
+					<div class="btn-group">
+						<a id="btn-publish" href="~/admin/post/publish" class="btn">Publicar</a>
+					</div>
+				</div>
 				<div class="btn-navbar pull-right">
 					<div class="btn-group">
 						<div class="input-append">
@@ -18,15 +29,7 @@
 							<a id="btn-search" href="javascript:void(0);" class="btn" type="button"><i class="icon icon-search"></i></a>
 						</div>
 					</div>
-					<div class="btn-group">
-						<a href="~/admin/post/add" class="btn btn-inverse"><i class="icon icon-plus icon-white"></i> Novo</a>
-						<a href="#post-remove-confirm" data-toggle="confirm" class="btn">Excluir</a>
-					</div>
-					<div class="btn-group">
-						<a id="btn-publish" href="~/admin/post/publish" class="btn">Publicar</a>
-					</div>
 				</div>
-
 			</caption>
 			<thead>
 				<tr>
@@ -34,6 +37,7 @@
 					<th class="span6">Título</th>
 					<th class="span3">Autor</th>
 					<th class="span2">Data</th>
+					<th class="span1">Status</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -42,16 +46,16 @@
 						<tr>
 							<td><input type="checkbox" name="items[]" value="<?= $p->Id ?>"></td>
 							<td>
-								<span class="badge <?= $p->Status ? 'badge-success' : '' ?>">&nbsp;</span>
 								<a href="~/admin/post/edit/<?= $p->Id ?>"><?= $p->Title ?></a>
 							</td>
 							<td><?= $p->Author ?></td>
 							<td><?= $p->PublicatedDate ?></td>
+							<td><span class="badge <?= $p->Status ? 'badge-success' : '' ?>">&nbsp;</span></td>
 						</tr>
 					<?php endforeach; ?>
 				<?php else: ?>
 					<tr>
-						<td colspan="4">Não há páginas a serem listadas.</td>
+						<td colspan="5">Não há páginas a serem listadas.</td>
 					</tr>
 				<?php endif ?>
 			</tbody>

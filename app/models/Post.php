@@ -93,7 +93,7 @@ class Post extends Model
 	{
 		$dateFormat = Config::get('date_format');
 		$this->CreatedDate = date($dateFormat, $this->CreatedDate);
-		$this->PublicatedDate = date($dateFormat, $this->PublicatedDate);
+		$this->PublicatedDate = $this->PublicatedDate ? date($dateFormat, $this->PublicatedDate) : '-';
 		$this->UpdatedDate = date($dateFormat, $this->UpdatedDate);
 		$this->Summary = substr(strip_tags($this->Content), 0, 255);
 	}

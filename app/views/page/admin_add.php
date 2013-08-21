@@ -32,5 +32,5 @@
 	<?php else: ?>
 	<button type="submit" class="btn btn-inverse">Atualizar</button>
 	<?php endif ?>
-	<a href="~/admin/page" class="btn">Cancelar</a>
+	<a href="~/admin/page" class="help-inline">Voltar</a>
 </form>

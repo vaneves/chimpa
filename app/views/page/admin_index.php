@@ -11,9 +11,13 @@
 		<h1>Páginas</h1>
 		<table class="table table-striped">
 			<caption>
-				<div class="btn-group pull-right">
-					<a href="~/admin/page/add" class="btn btn-inverse"><i class="icon icon-plus icon-white"></i> Nova</a>
-					<a href="#page-remove-confirm" data-toggle="confirm" class="btn">Excluir</a>
+				<div class="btn-navbar pull-left">
+					<div class="btn-group">
+						<a href="~/admin/page/add" class="btn btn-inverse"><i class="icon icon-plus icon-white"></i> Nova</a>
+					</div>
+					<div class="btn-group">
+						<a href="#page-remove-confirm" data-toggle="confirm" class="btn">Excluir</a>
+					</div>
 				</div>
 			</caption>
 			<thead>
