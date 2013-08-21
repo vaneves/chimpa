@@ -22,7 +22,7 @@
 			</div>
 			<hr>
 			<footer>
-				<p>© <?= Config::get('site_name') ?> <?= date('y') ?></p>
+				<p>© <?= Config::get('site_name') ?> <?= date('Y') ?></p>
 			</footer>
 		</div>
 		<script src="~/js/jquery.min.js"></script>
