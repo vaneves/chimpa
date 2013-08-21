@@ -1,5 +1,5 @@
 <div class="row-fluid">
-	<h1><?= $category->Name ?></h1>
+	<h1>Procurando por "<?= $q ?>"</h1>
 	<hr/>
 </div>
 <div class="row-fluid">
@@ -17,4 +17,4 @@
 		</div>
 	<?php endif; ?>
 </div>
-<?= Pagination::create('category/index', $model->Count, $p, $m) ?>
+<?= Pagination::create('post/search', $model->Count, $p, $m) ?>

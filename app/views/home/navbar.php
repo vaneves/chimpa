@@ -12,7 +12,7 @@
 					<li class="active"><a href="~/">Início</a></li>
 				</ul>
 				<div class="nav pull-right">
-					<form id="form-query" action="~/" method="GET">
+					<form id="form-query" action="~/post/search" method="GET">
 						<div class="btn-group">
 							<div class="input-append">
 								<input id="input-search" type="text" name="q" value="">

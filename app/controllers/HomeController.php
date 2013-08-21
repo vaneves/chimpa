@@ -14,14 +14,7 @@ class HomeController extends Controller
 		$m = 20;
 		$this->_set('m', $m);
 		
-		$q = Request::get('q');
-		$filters = array();
-		if($q)
-		{
-			$filters['Title'] = "%$q%";
-		}
-		
-		$posts = Post::search($p, $m, $o, $t, $filters);
+		$posts = Post::all($p, $m, $o, $t);
 		
 		$post = null;
 		if($posts->Data)

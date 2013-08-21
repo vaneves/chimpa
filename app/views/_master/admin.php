@@ -11,6 +11,8 @@
 		<link href="~/css/bootstrap-responsive.css" rel="stylesheet">
 		<link href="~/css/chosen.min.css" rel="stylesheet">
 		<link href="~/css/style.css" rel="stylesheet">
+		
+		<link rel="shortcut icon" href="~/img/favicon.png">
 	</head>
 
 	<body>

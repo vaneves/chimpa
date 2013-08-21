@@ -12,6 +12,25 @@ class PostController extends AdminController
 		return $this->_view($post);
 	}
 	
+	/**
+	 * @Auth("*")
+	 * @Master("public")
+	 */
+	public function search($p = 1, $m = 20, $o = 'Id', $t = 'DESC')
+	{
+		$q = Request::get('q');
+		$filters = array();
+		if($q)
+		{
+			$filters['Title'] = "%$q%";
+		}
+		
+		$this->_set('categories', Category::findAll());
+		$this->_set('q', $q);
+		$posts = Post::search($p, $m, $o, $t, $filters);
+		return $this->_view($posts);
+	}
+	
 	public function admin_index($p = 1, $m = 20, $o = 'Id', $t = 'DESC')
 	{
 		$filters = array();
