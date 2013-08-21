@@ -24,7 +24,7 @@ class ViewCategory extends Category
 	{
 		$p = ($p < 1 ? 1 : $p) - 1;
 		$db = Database::factory();
-		return $db->Category->where('PostId = ?', $id)->orderBy($o, $t)->paginate($p, $m);
+		return $db->ViewCategory->where('PostId = ?', $id)->orderBy($o, $t)->paginate($p, $m);
 	}
 }
 

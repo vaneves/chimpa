@@ -38,7 +38,7 @@ class ViewPost extends Post
 	{
 		$p = ($p < 1 ? 1 : $p) - 1;
 		$db = Database::factory();
-		return $db->Post->where('CategoryId = ?', $id)->orderBy($o, $t)->paginate($p, $m);
+		return $db->ViewPost->where('CategoryId = ?', $id)->orderBy($o, $t)->paginate($p, $m);
 	}
 	
 	/**
@@ -54,7 +54,7 @@ class ViewPost extends Post
 	{
 		$p = ($p < 1 ? 1 : $p) - 1;
 		$db = Database::factory();
-		return $db->Post->where('CategorySlug = ?', $slug)->orderBy($o, $t)->paginate($p, $m);
+		return $db->ViewPost->where('CategorySlug = ?', $slug)->orderBy($o, $t)->paginate($p, $m);
 	}
 }
 

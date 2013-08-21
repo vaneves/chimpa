@@ -13,7 +13,7 @@ class HomeController extends Controller
 	{
 		$m = 20;
 		$this->_set('m', $m);
-		$posts = ViewPost::all($p, $m, $o, $t);
+		$posts = Post::all($p, $m, $o, $t);
 		
 		$post = $posts->Data ? $posts->Data[0] : null;
 		$post->humanize();

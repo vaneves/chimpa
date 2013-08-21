@@ -11,6 +11,19 @@ class CategoryController extends AdminController
 		
 		$this->_set('active', 'category');
 	}
+	
+	/**
+	 * @Auth("*")
+	 * @Master("public")
+	 */
+	public function index($slug, $p = 1, $m = 20, $o = 'Id', $t = 'DESC')
+	{
+		$category = ViewCategory::getBySlug($slug);
+		$posts = ViewPost::allByCategory($category->Id, $p, $m, $o, $t);
+		$this->_set('categories', Category::findAll());
+		$this->_set('category', $category);
+		return $this->_view($posts);
+	}
 
 	public function admin_index($p = 1, $m = 20, $o = 'Id', $t = 'DESC')
 	{	
