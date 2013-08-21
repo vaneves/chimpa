@@ -45,7 +45,9 @@ class PostController extends AdminController
 				}
 				
 				$post->save();
-				$post->setCategories(Request::post('categories'));
+				
+				$categories = Request::post('categories');
+				if($categories) $post->setCategories($categories);
 				
 				$this->_flash('alert alert-success', 'Post salvo com sucesso.');
 			} 

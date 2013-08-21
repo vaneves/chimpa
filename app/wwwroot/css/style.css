@@ -39,3 +39,7 @@ header
 {
 	display: none !important;
 }
+.content
+{
+	margin-top: 20px;
+}

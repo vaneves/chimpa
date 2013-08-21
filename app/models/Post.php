@@ -95,6 +95,7 @@ class Post extends Model
 		$this->CreatedDate = date($dateFormat, $this->CreatedDate);
 		$this->PublicatedDate = date($dateFormat, $this->PublicatedDate);
 		$this->UpdatedDate = date($dateFormat, $this->UpdatedDate);
+		$this->Summary = substr(strip_tags($this->Content), 0, 255);
 	}
 	
 	public function setCategories($categories)
