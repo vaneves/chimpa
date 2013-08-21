@@ -1,6 +1,17 @@
 <?php
 class PostController extends AdminController
 {
+	/**
+	 * @Auth("*")
+	 * @Master("public")
+	 */
+	public function index($slug)
+	{
+		$post = ViewPost::getBySlug($slug);
+		$this->_set('categories', Category::findAll());
+		return $this->_view($post);
+	}
+	
 	public function admin_index($p = 1, $m = 20, $o = 'Id', $t = 'DESC')
 	{
 		$filters = array();
