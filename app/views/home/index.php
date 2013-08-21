@@ -14,7 +14,7 @@
 			<p><a class="btn" href="~/<?= $p->Slug ?>">Ver mais »</a></p>
 		</div>
 	<?php endforeach; ?>
-	<?php else: ?>
+	<?php elseif(!$post): ?>
 		<div class="span12">
 			<p>Nenhum post econtrado.</p>
 		</div>

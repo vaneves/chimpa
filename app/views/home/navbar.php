@@ -11,6 +11,16 @@
 				<ul class="nav">
 					<li class="active"><a href="~/">Início</a></li>
 				</ul>
+				<div class="nav pull-right">
+					<form id="form-query" action="~/" method="GET">
+						<div class="btn-group">
+							<div class="input-append">
+								<input id="input-search" type="text" name="q" value="">
+								<a id="btn-search" href="javascript:void(0);" class="btn" type="button"><i class="icon icon-search"></i></a>
+							</div>
+						</div>
+					</form>
+				</div>
 			</div>
 		</div>
 	</div>
