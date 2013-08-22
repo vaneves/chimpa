@@ -48,8 +48,8 @@
 							<td>
 								<a href="~/admin/post/edit/<?= $p->Id ?>"><?= $p->Title ?></a>
 							</td>
-							<td><?= $p->Author ?></td>
-							<td><?= $p->PublicatedDate ?></td>
+							<td><?= $p->AuthorName ?></td>
+							<td><?= $p->PublicationDate ?></td>
 							<td><span class="badge <?= $p->Status ? 'badge-success' : '' ?>">&nbsp;</span></td>
 						</tr>
 					<?php endforeach; ?>

@@ -29,7 +29,7 @@ class Post extends Model
 		/**
 	 * @Column(Type="Int")
 	 */
-	public $PublicatedDate;
+	public $PublicationDate;
 	
 	/**
 	 * @Column(Type="Int")
@@ -50,6 +50,21 @@ class Post extends Model
 	 * @Column(Type="Int")
 	 */
 	public $Status;
+	
+	/**
+	 * @Column(Type="String")
+	 */
+	public $Type;
+	
+	/**
+	 * @Column(Type="Int")
+	 */
+	public $ParentId;
+	
+	/**
+	 * @Column(Type="Int")
+	 */
+	public $Order;
 	
 	/**
 	 * Retorna as categorias de um post.
@@ -93,7 +108,7 @@ class Post extends Model
 	{
 		$dateFormat = Config::get('date_format');
 		$this->CreatedDate = date($dateFormat, $this->CreatedDate);
-		$this->PublicatedDate = $this->PublicatedDate ? date($dateFormat, $this->PublicatedDate) : '-';
+		$this->PublicationDate = $this->PublicationDate ? date($dateFormat, $this->PublicationDate) : '-';
 		$this->UpdatedDate = date($dateFormat, $this->UpdatedDate);
 		$this->Summary = substr(strip_tags($this->Content), 0, 255);
 	}
@@ -146,7 +161,7 @@ class Post extends Model
 		
 		foreach ($posts as $p)
 		{
-			$p->PublicatedDate = time();
+			$p->PublicationDate = time();
 			$p->Status = 1;
 			$db->Post->update($p);
 		}
@@ -157,5 +172,12 @@ class Post extends Model
 	public function isAuthorizedManager($userId)
 	{
 		return $this->UserId == $userId || Auth::is('Manager', 'Admin');
+	}
+	
+	public static function allByType($type, $p = 1, $m = 10, $o = 'Id', $t = 'DESC')
+	{
+		$p = ($p < 1 ? 1 : $p) - 1;
+		$db = Database::factory();
+		return $db->Post->where('Type = ?', $type)->orderBy($o, $t)->paginate($p, $m);
 	}
 }

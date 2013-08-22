@@ -23,7 +23,12 @@ class ViewPost extends Post
 	/**
 	 * @Column(Type="String")
 	 */
-	public $Author;
+	public $AuthorName;
+	
+	/**
+	 * @Column(Type="String")
+	 */
+	public $AuthorEmail;
 	
 	/**
 	 * Retorna os posts de uma categoria pelo id.

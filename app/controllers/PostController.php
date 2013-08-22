@@ -72,6 +72,7 @@ class PostController extends AppController
 				$post->Content = strip_tags(Request::post('Content'), Config::get('html_safe_list'));
 				$post->UserId = Session::get('user')->Id;
 				$post->CreatedDate = time();
+				$post->Type = 'post';
 				$post->Slug = Inflector::slugify(Request::post('Title'));
 				
 				if(Request::post('Draft'))
@@ -80,7 +81,7 @@ class PostController extends AppController
 				}
 				else
 				{
-					$post->PublicatedDate = time();
+					$post->PublicationDate = time();
 					$post->Status = 1;
 				}
 				
@@ -133,7 +134,7 @@ class PostController extends AppController
 				}
 				else
 				{
-					$post->PublicatedDate = time();
+					$post->PublicationDate = time();
 					$post->Status = 1;
 				}
 				
@@ -167,7 +168,8 @@ class PostController extends AppController
 				$ids = Request::post('items', array());
 				Post::deleteAll($ids);
 				$this->_flash('alert alert-success', 'Posts excluídos com sucesso.');
-			} catch (Exception $e)
+			} 
+			catch (Exception $e)
 			{
 				$this->_flash('alert alert-error', 'Ocorreu um erro e não foi possível excluir os posts.');
 			}
@@ -184,7 +186,8 @@ class PostController extends AppController
 				$ids = Request::post('items', array());
 				Post::publishAll($ids);
 				$this->_flash('alert alert-success', 'Posts publicados com sucesso.');
-			} catch (Exception $e)
+			} 
+			catch (Exception $e)
 			{
 				$this->_flash('alert alert-error', 'Ocorreu um erro e não foi possível publicar os posts.');
 			}
