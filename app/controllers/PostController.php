@@ -9,7 +9,19 @@ class PostController extends AdminController
 	{
 		$post = ViewPost::getBySlug($slug);
 		$this->_set('categories', Category::findAll());
-		return $this->_view($post);
+		
+		if($post !== null)
+		{
+			return $this->_view($post);
+		}
+		else
+		{
+			$page = Page::getBySlug($slug);
+			if($page !== null)
+				return $this->_view('page', 'index', $page);
+			else
+				throw new PageNotFoundException('Página não encontrada.');
+		}
 	}
 	
 	/**
@@ -80,6 +92,7 @@ class PostController extends AdminController
 				if($categories) $post->setCategories($categories);
 				
 				$this->_flash('alert alert-success', 'Post salvo com sucesso.');
+				$this->_redirect('~/admin/post/edit/' . $post->Id);
 			} 
 			catch (ValidationException $e)
 			{

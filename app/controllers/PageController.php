@@ -27,7 +27,7 @@ class PageController extends AdminController
 				$page = $this->_data($page);
 				$page->Slug = Inflector::slugify($page->Title);
 				$page->Status = Request::post('Draft') ? 0 : 1;
-				$page->Content = Request::post('Content');
+				$page->Content = strip_tags(Request::post('Content'), Config::get('html_safe_list'));
 				$page->save();
 				$this->_flash('alert alert-success', 'Página salva com sucesso.');
 				$this->_redirect('~/admin/page/edit/' . $page->Id);
@@ -61,6 +61,7 @@ class PageController extends AdminController
 			try
 			{
 				$page = $this->_data($page);
+				$page->Content = strip_tags(Request::post('Content'), Config::get('html_safe_list'));
 				$page->Status = Request::post('Draft') ? 0 : 1;
 				$page->save();
 				$this->_flash('alert alert-success', 'Página salva com sucesso.');

@@ -41,6 +41,12 @@ class Page extends Model
 	 */
 	public $Order;
 	
+	public static function getBySlug($slug)
+	{
+		$db = Database::factory();
+		return $db->Page->single('Slug = ?', $slug);
+	}
+	
 	public static function deleteAll($ids)
 	{
 		$db = Database::factory();
