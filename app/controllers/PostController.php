@@ -1,9 +1,8 @@
 <?php
-class PostController extends AdminController
+class PostController extends AppController
 {
 	/**
 	 * @Auth("*")
-	 * @Master("public")
 	 */
 	public function index($slug)
 	{
@@ -26,7 +25,6 @@ class PostController extends AdminController
 	
 	/**
 	 * @Auth("*")
-	 * @Master("public")
 	 */
 	public function search($p = 1, $m = 20, $o = 'Id', $t = 'DESC')
 	{

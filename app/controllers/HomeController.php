@@ -1,14 +1,6 @@
 <?php
-class HomeController extends Controller
-{
-	/**
-	 * @Master("public") 
-	 */
-	public function __construct()
-	{
-		$this->_set('categories', Category::findAll());
-	}
-	
+class HomeController extends AppController
+{	
 	public function index($p = 1, $o = 'Id', $t = 'DESC')
 	{
 		$m = 20;

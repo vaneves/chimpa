@@ -1,13 +1,11 @@
 <?php
-class UserController extends AdminController
+class UserController extends AppController
 {
 	/**
 	 *@Auth("Admin") 
 	 */
 	public function __construct()
 	{
-		parent::__construct();
-		
 		$this->_set('active', 'user');
 	}
 	

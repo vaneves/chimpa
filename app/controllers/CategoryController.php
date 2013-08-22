@@ -1,20 +1,17 @@
 <?php
 
-class CategoryController extends AdminController
+class CategoryController extends AppController
 {
 	/**
 	 * @Auth("Admin","Manager") 
 	 */
 	public function __construct()
 	{
-		parent::__construct();
-		
 		$this->_set('active', 'category');
 	}
 	
 	/**
 	 * @Auth("*")
-	 * @Master("public")
 	 */
 	public function index($slug, $p = 1, $m = 20, $o = 'Id', $t = 'DESC')
 	{

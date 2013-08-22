@@ -1,13 +1,11 @@
 <?php
-class PageController extends AdminController
+class PageController extends AppController
 {
 	/**
 	 * @Auth("Admin","Manager") 
 	 */
 	public function __construct()
 	{
-		parent::__construct();
-		
 		$this->_set('active', 'page');
 	}
 	
