@@ -1,27 +1,23 @@
-<div class="navbar navbar-inverse navbar-fixed-top">
+<header class="navbar navbar-inverse">
 	<div class="navbar-inner">
-		<div class="container-fluid">
-			<button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+		<nav class="container">
+			<a class="btn btn-navbar" data-toggle="collapse" data-target=".navbar-inverse-collapse">
 				<span class="icon-bar"></span>
 				<span class="icon-bar"></span>
 				<span class="icon-bar"></span>
-			</button>
+			</a>
 			<a class="brand" href="~/"><?= Config::get('site_name') ?></a>
-			<div class="nav-collapse collapse">
+			<div class="nav-collapse collapse navbar-inverse-collapse">
 				<ul class="nav">
-					<li class="active"><a href="~/">Início</a></li>
+					<li><a href="~/">Início</a></li>
+					<?php foreach ($pages as $p): ?>
+					<li><a href="~/<?= $p->Slug ?>"><?= $p->Title ?></a></li>
+					<?php endforeach; ?>
 				</ul>
-				<div class="nav pull-right">
-					<form id="form-query" action="~/post/search" method="GET">
-						<div class="btn-group">
-							<div class="input-append">
-								<input id="input-search" type="text" name="q" value="">
-								<a id="btn-search" href="javascript:void(0);" class="btn" type="button"><i class="icon icon-search"></i></a>
-							</div>
-						</div>
-					</form>
-				</div>
+				<form class="navbar-form pull-right" action="~/post/search" method="GET">
+					<input type="text" name="q" class="search-query span2" placeholder="Busca">
+				</form>
 			</div>
-		</div>
+		</nav>
 	</div>
-</div>
+</header>

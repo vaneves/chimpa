@@ -180,4 +180,10 @@ class Post extends Model
 		$db = Database::factory();
 		return $db->Post->where('Type = ?', $type)->orderBy($o, $t)->paginate($p, $m);
 	}
+	
+	public static function allPages($o = 'Order', $t = 'ASC')
+	{
+		$db = Database::factory();
+		return $db->Post->where('Type = ?', 'page')->orderBy('`'. $o .'`', $t)->all();
+	}
 }

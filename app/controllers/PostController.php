@@ -7,20 +7,10 @@ class PostController extends AppController
 	public function index($slug)
 	{
 		$post = ViewPost::getBySlug($slug);
-		$this->_set('categories', Category::findAll());
+		if($post == null)
+			throw new PageNotFoundException('Página não encontrada.');
 		
-		if($post !== null)
-		{
-			return $this->_view($post);
-		}
-		else
-		{
-			$page = Page::getBySlug($slug);
-			if($page !== null)
-				return $this->_view('page', 'index', $page);
-			else
-				throw new PageNotFoundException('Página não encontrada.');
-		}
+		return $this->_view($post->Type, 'index', $post);
 	}
 	
 	/**

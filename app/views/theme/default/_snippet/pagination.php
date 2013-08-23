@@ -1,4 +1,4 @@
-<div class="pagination">
+<nav class="pagination">
 <?php if($count > 1): ?>
 	<ul>
 		<?php if($p > 1): ?>
@@ -20,4 +20,4 @@
 <?php else: ?>
 	<p class="muted">Página 1 de 1</p>
 <?php endif ?>
-</div>
+</nav>
