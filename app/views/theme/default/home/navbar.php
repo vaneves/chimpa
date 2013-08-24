@@ -10,6 +10,9 @@
 			<div class="nav-collapse collapse">
 				<ul class="nav">
 					<li class="active"><a href="~/">Início</a></li>
+					<?php foreach ($pages as $p): ?>
+					<li><a href="~/<?= $p->Slug ?>"><?= $p->Title ?></a></li>
+					<?php endforeach; ?>
 				</ul>
 				<div class="nav pull-right">
 					<form id="form-query" action="~/post/search" method="GET">

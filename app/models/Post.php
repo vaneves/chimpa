@@ -181,9 +181,24 @@ class Post extends Model
 		return $db->Post->where('Type = ?', $type)->orderBy($o, $t)->paginate($p, $m);
 	}
 	
-	public static function allPages($o = 'Order', $t = 'ASC')
+	public static function allPages($onlyParent = false, $o = 'Order', $t = 'ASC')
 	{
 		$db = Database::factory();
+		if($onlyParent)
+			return $db->Post->where('Type = ? AND (ParentId IS NULL OR ParentId = 0)', 'page')->orderBy('`'. $o .'`', $t)->all();
 		return $db->Post->where('Type = ?', 'page')->orderBy('`'. $o .'`', $t)->all();
+	}
+	
+	public static function all($p = 1, $m = 10, $o = 'Id', $t = 'asc')
+	{
+		$p = ($p < 1 ? 1 : $p) - 1;
+		$db = Database::factory();
+		return $db->Post->where('Type = ?', 'post')->orderBy($o, $t)->paginate($p, $m);
+	}
+	
+	public static function allByParent($id, $o = 'Order', $t = 'asc')
+	{
+		$db = Database::factory();
+		return $db->Post->where('Type = ? AND ParentId = ?', 'page', $id)->orderBy('`'. $o .'`', $t)->all();
 	}
 }

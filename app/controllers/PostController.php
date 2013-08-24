@@ -14,6 +14,9 @@ class PostController extends AppController
 		if($post == null)
 			throw new PageNotFoundException('Página não encontrada.');
 		
+		$children = Post::allByParent($post->Id);
+		$this->_set('children', $children);
+		
 		return $this->_view($post->Type, 'index', $post);
 	}
 	
