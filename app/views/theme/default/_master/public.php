@@ -10,11 +10,11 @@
 		<link rel="shortcut icon" href="~/img/favicon.png">
 	</head>
 	<body>
-		<?= Import::view(array('pages' => $pages), 'home', 'navbar') ?>
+		<?= Import::view(array('pages' => $pages), '_master', 'navbar') ?>
 		<div class="container-fluid content">
 			<div class="row-fluid">
 				<div class="span3">
-					<?= Import::view(array('categories' => $categories), 'home', 'sidebar') ?>
+					<?= Import::view(array('categories' => $categories), '_master', 'sidebar') ?>
 				</div>
 				<section class="span9">
 					<?= CONTENT ?>

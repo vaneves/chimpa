@@ -15,6 +15,6 @@
 
 Route::prefix('admin');
 Route::add('^admin/?$', 'admin/user/login');
-Route::add('^([\d]{4})\/([\d]{1,2})\/([\d]{1,2})\/([a-zA-Z0-9\-]+)$', 'home/post/$4/$1/$2/$3');
-Route::add('^([a-zA-Z0-9\-]+)$', 'post/index/$1');
+Route::add('^([\d]{4})\/([\d]{1,2})\/([\d]{1,2})\/([a-zA-Z0-9\-]+)$', 'post/view/$4/$1/$2/$3');
+Route::add('^([a-zA-Z0-9\-]+)$', 'post/view/$1');
 Route::add('^category/([a-zA-Z0-9\-]+)(\/(.*))?$', 'category/index/$1/$3');

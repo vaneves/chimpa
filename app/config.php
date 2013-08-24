@@ -41,7 +41,7 @@ Config::set('default_master', 'public');
 /**
  * Controller padrão
  */
-Config::set('default_controller', 'Home');
+Config::set('default_controller', 'Post');
 
 /**
  * Controller padrão para páginas de erro. Defina como NULL para não utilizar controler de erro
