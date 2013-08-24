@@ -61,6 +61,43 @@ class ViewPost extends Post
 		$db = Database::factory();
 		return $db->ViewPost->where('CategorySlug = ?', $slug)->orderBy($o, $t)->paginate($p, $m);
 	}
-}
+	
+	public static function search($p = 1, $m = 10, $o = 'Id', $t = 'asc', $filters = array(), $whereOp = 'OR')
+	{
+		$p = $m * (($p < 1 ? 1 : $p) - 1);
+		$class = get_called_class();
+		$db = Database::factory();
+		$entity = $db->{$class}->orderBy($o, $t);
+		if(is_array($filters))
+		{
+			$fields = array();
+			$values = array();
 
-?>
+			foreach ($filters as $k => $v)
+			{
+				if(is_array($v))
+				{
+					$fields[] = $v[0] . ' ' . $v[1] . ' ?';
+					$values[] = $v[2];
+				}
+				else
+				{
+					if(preg_match('/^%(.*)%$/', $v) !== 0)
+					{
+						$fields[] = $k .' LIKE ?';
+					}
+					else
+					{
+						$fields[] = $k .' = ?';
+					}
+
+					$values[] = $v;
+				}
+			}
+				
+			$fields = implode(" $whereOp ", $fields);
+			$entity->whereArray($fields, $values);
+		}
+		return $entity->groupBy('Id')->paginate($p, $m);
+	}
+}
