@@ -1,6 +1,10 @@
 <?php
 class PostController extends AppController
 {
+	public function __construct()
+	{
+		$this->_set('active', 'post');
+	}
 	/**
 	 * @Auth("*")
 	 */

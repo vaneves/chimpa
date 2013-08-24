@@ -10,7 +10,6 @@ class AppController extends Controller
 				Auth::allow('Admin', 'Manager', 'Author');
 			
 			$this->Template->setMaster('admin');
-			$this->_set('active', 'post');
 		}
 		else
 		{

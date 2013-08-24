@@ -4,8 +4,9 @@
 		<meta http-equiv="Content-Type" content="text/html; charset=<?= Config::get('charset') ?>">
 		<meta charset="<?= Config::get('charset') ?>">
 		<title><?= Config::get('site_name') ?></title>
-		<link href="~/theme/default/css/bootstrap.min.css" rel="stylesheet">
-		<link href="~/theme/default/css/bootstrap-responsive.min.css" rel="stylesheet">
+		<link href="~/css/bootstrap.css" rel="stylesheet">
+		<link href="~/css/bootstrap-responsive.css" rel="stylesheet">
+		<link href="~/css/style.css" rel="stylesheet">
 		<link rel="shortcut icon" href="~/img/favicon.png">
 	</head>
 	<body>
@@ -24,5 +25,7 @@
 				<p class="muted"><?= Config::get('site_name') ?> - Feito com <a href="http://triladophp.org">Trilado Framework</a>.</p>
 			</footer>
 		</div>
+		<script src="~/js/jquery.min.js"></script>
+		<script src="~/js/bootstrap.min.js"></script>
 	</body>
 </html>
