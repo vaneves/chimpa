@@ -10,13 +10,12 @@ class AppController extends Controller
 				Auth::allow('Admin', 'Manager', 'Author');
 			
 			$this->Template->setMaster('admin');
-			$this->_set('active', 'post');
 		}
 		else
 		{
 			$this->Template->setDirectory(App::ROOT . 'app/views/theme/' . Config::get('theme') . '/');
 			$this->_set('categories', Category::findAll());
-			$this->_set('pages', Post::allPages());
+			$this->_set('pages', Post::allPages(true));
 		}
 	}
 }
