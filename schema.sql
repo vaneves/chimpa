@@ -81,6 +81,19 @@ CREATE TABLE IF NOT EXISTS `user` (
 -- --------------------------------------------------------
 
 --
+-- Estrutura da tabela `option`
+--
+
+CREATE TABLE IF NOT EXISTS `option` (
+  `Id` int(11) NOT NULL AUTO_INCREMENT,
+  `Name` varchar(128) NOT NULL,
+  `Value` varchar(128) NOT NULL,
+  PRIMARY KEY (`Id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
 -- Estrutura stand-in para visualizar `view_category`
 --
 CREATE TABLE IF NOT EXISTS `view_category` (

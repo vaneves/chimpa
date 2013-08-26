@@ -1,11 +1,14 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 	<head>
-		<meta http-equiv="Content-Type" content="text/html; charset=<?= Config::get('charset') ?>">
-		<meta charset="<?= Config::get('charset') ?>">
-		<title><?= Config::get('site_name') ?></title>
+		<meta charset="utf-8">
+		<title>Chimpan</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta name="description" content="">
+		<meta name="author" content="Vaneves">
+		
 		<link href="~/theme/default/css/bootstrap.min.css" rel="stylesheet">
-		<!--<link href="~/theme/default/css/bootstrap-responsive.min.css" rel="stylesheet">-->
+		s
 		<link rel="shortcut icon" href="~/img/favicon.png">
 	</head>
 	<body>

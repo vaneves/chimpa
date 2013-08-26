@@ -13,19 +13,26 @@ label.error {
 }
 /* END VALIDATION */
 
-.form-signin {
+.form-signin, .form-install {
 	max-width: 300px;
 	padding: 19px 29px 29px;
 	margin: 50px auto 50px;
 	background-color: #fff;
 	border: 1px solid #e5e5e5;
 }
+.form-install {
+	max-width: 500px;
+}
 .form-signin .form-signin-heading,
-.form-signin .checkbox {
+.form-signin .checkbox, 
+.form-install .form-install-heading, 
+.form-install .checkbox {
 	margin-bottom: 10px;
 }
 .form-signin input[type="text"],
-.form-signin input[type="password"] {
+.form-signin input[type="password"],
+.form-install input[type="text"],
+.form-install input[type="password"] {
 	font-size: 16px;
 	height: auto;
 	margin-bottom: 15px;
@@ -42,9 +49,4 @@ header
 .content
 {
 	margin-top: 20px;
-}
-
-#form-query
-{
-	margin: 0;
 }

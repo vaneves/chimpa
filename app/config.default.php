@@ -14,7 +14,7 @@
  * Define o tipo do debug
  */
 Config::set('debug', array(
-	'type'	=> 'local', //pode assumir os seguintes valores: off, local, network e all
+	'type'	=> 'off', //pode assumir os seguintes valores: off, local, network e all
 	'query'	=> false, //pode assumir false, para desativar, ou um valor para a query ?debug=seu-valor-seguro
 	'sql'	=> false, 
 ));
@@ -26,7 +26,7 @@ Config::set('database', array(
 	'default' => array(
 		'type' => 'mysql',
 		'host' => 'localhost',
-		'name' => 'orango',
+		'name' => 'chimpan',
 		'user' => 'root',
 		'pass' => '',
 		'validate' => true
@@ -76,7 +76,7 @@ Config::set('date_format', 'd/m/Y');
 /**
  * Chave de segurança (deve ser alterada)
  */
-Config::set('salt', '3Df3g&¨bfd34hukk[ufd;');
+Config::set('salt', '2cd76196e4d8a87635719964414ea09c');
 
 /**
  * Define se as requisições via dispositivo móvel irão carregar os templates específicos, se existirem, para versão móvel

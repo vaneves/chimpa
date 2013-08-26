@@ -6,7 +6,7 @@ class AppController extends Controller
 	{
 		if(isset($this->args['prefix']) && $this->args['prefix'] == 'admin')
 		{
-			if($this->args['action'] != 'admin_login')
+			if($this->args['action'] != 'admin_login' && $this->args['controller'] != 'install')
 				Auth::allow('Admin', 'Manager', 'Author');
 			
 			$this->Template->setMaster('admin');

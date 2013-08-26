@@ -18,12 +18,6 @@
 	define('ROOT_VIRTUAL', str_replace($_SERVER['DOCUMENT_ROOT'], '', ROOT));
 	define('WWWROOT', ROOT . 'app/wwwroot/');
 	
-	if(!file_exists(ROOT . 'app/config.php'))
-	{
-		header('Location: ' . ROOT_VIRTUAL . 'install.php');
-		exit;
-	}
-	
 	//importa o arquivo de erro
 	require_once ROOT . 'core/libs/Error.php';
 	require_once ROOT . 'core/libs/Debug.php';
@@ -41,7 +35,7 @@
 	require_once ROOT . 'core/libs/Route.php';
 	require_once ROOT . 'core/libs/Config.php';
 	require_once ROOT . 'core/libs/Module.php';
-	require_once ROOT . 'app/config.php';
+	require_once ROOT . 'app/config.default.php';
 	require_once ROOT . 'app/routes.php';
 	require_once ROOT . 'core/constantes.php';
 	require_once ROOT . 'core/functions.php';
@@ -68,7 +62,7 @@
 	
 	Import::core('App');
 	
-	$url = isset($_SERVER['PATH_INFO']) ? $_SERVER['PATH_INFO'] : '';
+	$url = 'admin/install' . (isset($_SERVER['PATH_INFO']) ? $_SERVER['PATH_INFO'] : '');
 	
 	new App($url);
 	
