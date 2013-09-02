@@ -4,5 +4,9 @@
  * All rights reserved.
  */
 
-
+if(!file_exists('../app/config.php'))
+{
+	header('Location: install.php');
+	exit;
+}
 require_once '../../core/bootstrap.php';
