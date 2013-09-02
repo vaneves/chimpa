@@ -9,6 +9,7 @@
  * Classe principal do Framework, responsável pelo controlar todo o fluxo, fazendo chama de outras classes
  * 
  * @author		Valdirene da Cruz Neves Júnior <vaneves@vaneves.com>
+ * @author		Diego Oliveira <diegopso2@gmail.com>
  * @author		Jackson Gomes <jackson.souza@gmail.com>
  * @version		2.7
  *
@@ -18,12 +19,33 @@ class App
 	/**
 	 * Guarda o caminho do diretório raiz da aplicação.
 	 */
-	const ROOT = ROOT;
+	public static $root;
+
+	/**
+	 * Guarda o caminho virtual da aplicação.
+	 */
+	public static $rootVirtual;
+
+	/**
+	 * Guarda o caminho do diretório WWWROOT.
+	 */
+	public static $wwwroot;
+
+	/**
+	 * Guarda o caminho do diretório core.
+	 */
+	public static $rootCore;
+
+	/**
+	 * Guarda o cache time.
+	 */
+	public static $cacheTime = 60;
+
 	/**
 	 * Guarda os argumentos passados pela URL (prefixo, controller, action e parâmetros)
 	 * @var	array
 	 */
-	private $args = array();
+	public static $args = array();
 	
 	/**
 	 * Guarda o nome do módulo a ser executado
@@ -42,6 +64,28 @@ class App
 	 * @var String
 	 */
 	public static $action;
+
+	/**
+	* Inicia a aplicação e calcula as constantes iniciais.
+	*/
+	public static function init($root)
+	{
+		self::$root = $root;
+		self::$rootVirtual = str_replace($_SERVER['DOCUMENT_ROOT'], '', self::$root);
+		self::$wwwroot = self::$root . 'app/wwwroot/';
+		self::$rootCore = self::$root . 'core/';
+
+		//define as constantes de root
+		define('root', $root);
+		define('root_virtual', str_replace($_SERVER['DOCUMENT_ROOT'], '', self::$root));
+		define('wwwroot', self::$root . 'app/wwwroot/');
+		
+		define('ROOT', $root);
+		define('ROOT_VIRTUAL', str_replace($_SERVER['DOCUMENT_ROOT'], '', self::$root));
+		define('WWWROOT', self::$root . 'app/wwwroot/');
+
+		define('CACHE_TIME', self::$cacheTime);
+	}
 	
 	/**
 	 * Contrutor da classe
@@ -49,7 +93,6 @@ class App
 	 */
 	public function __construct($url)
 	{
-		define('CACHE_TIME', 60);
 		$cache_config = Config::get('cache');
 		if($cache_config['enabled'] && $cache_config['page'])
 		{
@@ -63,49 +106,44 @@ class App
 		
 		$registry = Registry::getInstance();
 		
-		$this->args = $this->args($url);
+		self::$args = $this->args($url);
 		
 		//I18n
-		define('lang', $this->args['lang']);
-		
-		define('LANG', $this->args['lang']);
+		if (!defined('LANG')) 
+		{
+			define('lang', self::$args['lang']);
+			define('LANG', self::$args['lang']);
+		}
 		
 		$i18n = I18n::getInstance();
 		$i18n->setLang(LANG);
 		
 		$registry->set('I18n', $i18n);
 		
-		function __($string, $format = null)
+		if(!function_exists('__'))
 		{
-			return I18n::getInstance()->get($string, $format);
+			function __($string, $format = null)
+			{
+				return I18n::getInstance()->get($string, $format);
+			}
+			function _e($string, $format = null)
+			{
+				echo I18n::getInstance()->get($string, $format);
+			}
 		}
-		function _e($string, $format = null)
+		
+		self::$controller = Inflector::camelize(self::$args['controller']) .'Controller';
+		self::$action = str_replace('-', '_', self::$args['action']);
+		self::$module = self::$args['module'];
+		
+		if (!defined('CONTROLLER')) 
 		{
-			echo I18n::getInstance()->get($string, $format);
+			define('controller', self::$controller );
+			define('action', self::$action);
+			
+			define('CONTROLLER', self::$controller );
+			define('ACTION', self::$action);
 		}
-		
-		self::$controller = Inflector::camelize($this->args['controller']) .'Controller';
-		self::$action = str_replace('-', '_', $this->args['action']);
-		self::$module = $this->args['module'];
-		
-		$modules = Config::get('modules');
-		if(self::$module)
-		{
-			unset($modules[App::$module]);
-			Import::register_module(App::$module);
-		}
-		Import::register('app/models/');
-		Import::register('app/controllers/');
-		Import::register('app/helpers/');
-		
-		foreach($modules as $m)
-			Import::register_module($m);
-		
-		define('controller', self::$controller );
-		define('action', self::$action);
-		
-		define('CONTROLLER', self::$controller );
-		define('ACTION', self::$action);
 		
 		try
 		{
@@ -118,7 +156,7 @@ class App
 			$this->auth();
 			$tpl = new Template();
 			$registry->set('Template', $tpl);
-			$tpl->render($this->args);
+			$tpl->render(self::$args);
 			
 			if($cache_config['enabled'] && $cache_config['page'])
 			{
@@ -216,9 +254,9 @@ class App
 	private function isValidParams($method)
 	{
 		$params = $method->getParameters();
-		if(count($this->args['params']) > count($params)) 
+		if(count(self::$args['params']) > count($params)) 
 			return false;
-		if(count($this->args['params']) < count($params))
+		if(count(self::$args['params']) < count($params))
 		{
 			$cont = 0;
 			foreach ($params as $param)
@@ -226,7 +264,7 @@ class App
 				if(!$param->isOptional()) 
 					$cont++;		
 			}
-			if(count($this->args['params']) < $cont) 
+			if(count(self::$args['params']) < $cont) 
 				return false;
 		}
 		return true;
